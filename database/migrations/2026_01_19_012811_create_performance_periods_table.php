@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('performance_periods', function (Blueprint $table) {
-    $table->id();
-    $table->year('year');
-    $table->string('name');
-    $table->date('start_date');
-    $table->date('end_date');
-    $table->timestamps();
-});
+        Schema::create('performance_periods', function (Blueprint $table) {
+            $table->id();
+            $table->year('year');
+            $table->string('name');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->timestamps();
+
+            $table->unique(['year', 'name']);
+        });
 
     }
 

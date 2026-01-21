@@ -11,21 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('performance_assessments', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('user_id')
-          ->constrained('users')
-          ->cascadeOnDelete();
+        Schema::create('performance_assessments', function (Blueprint $table) {
+            $table->id();
 
-    $table->foreignId('period_id')
-          ->constrained('performance_periods')
-          ->cascadeOnDelete();
+            // NIK karyawan yang dinilai
+            $table->string('user_nik');
 
-    $table->timestamps();
+            $table->foreignId('period_id')
+                ->constrained('performance_periods')
+                ->cascadeOnDelete();
 
-    // 1 user 1 periode
-    $table->unique(['user_id','period_id']);
-});
+            $table->enum('status', ['draft', 'submitted', 'approved'])
+                ->default('draft');
+
+            $table->timestamps();
+
+            // Relasi ke users.nik
+            $table->foreign('user_nik')
+                ->references('nik')
+                ->on('users')
+                ->cascadeOnDelete();
+
+            // Cegah penilaian ganda
+            $table->unique(['user_nik', 'period_id']);
+        });
 
     }
 
