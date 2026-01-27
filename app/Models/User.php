@@ -31,7 +31,12 @@ public function roles(){
      * @var list<string>
      */
     protected $fillable = [
+        'nik',
         'name',
+        'status',
+        'dept',
+        'jabatan',
+        'pendidikan',
         'email',
         'password',
     ];

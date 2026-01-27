@@ -39,7 +39,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                       
+
                     </x-slot>
                 </x-dropdown>
             </div>

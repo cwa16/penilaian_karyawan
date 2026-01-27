@@ -1,36 +1,25 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
-    public function import(Request $request)
+    public function index(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:csv,txt',
-        ]);
+        $query = User::query();
 
-        $file = fopen($request->file('file'), 'r');
-
-        $header = fgetcsv($file); // skip header
-
-        while (($row = fgetcsv($file)) !== FALSE) {
-            Employee::create([
-                'nik' => $row[0],
-                'name' => $row[1],
-                'status' => $row[2],
-                'dept' => $row[3],
-                'jabatan' => $row[4],
-                'pendidikan' => $row[5],
-            ]);
+        // Search by NIK / Name
+        if ($request->search) {
+            $query->where('nik', 'like', "%{$request->search}%")
+                ->orWhere('name', 'like', "%{$request->search}%");
         }
 
-        fclose($file);
-return redirect()->route('dashboard')
-                 ->with('success', 'Data berhasil diimport!');
+        $employees = $query
+            ->orderBy('name')
+            ->paginate(15);
 
+        return view('admin.employees.index', compact('employees'));
     }
 }

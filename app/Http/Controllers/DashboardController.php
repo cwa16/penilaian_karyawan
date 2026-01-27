@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Employee; // pastikan model Employee
+use App\Models\User; // pastikan model Employee
 
 class DashboardController extends Controller
 {
@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $search = $request->get('search');
 
         // Query employee dengan kondisi optional
-        $query = Employee::query();
+        $query = User::query();
 
         if($status) $query->where('status', $status);
         if($dept) $query->where('dept', $dept);
@@ -26,9 +26,9 @@ class DashboardController extends Controller
         $employees = $query->get();
 
         // Ambil data unik untuk dropdown filter
-        $allStatus = Employee::select('status')->distinct()->pluck('status');
-        $allDept = Employee::select('dept')->distinct()->pluck('dept');
-        $allJabatan = Employee::select('jabatan')->distinct()->pluck('jabatan');
+        $allStatus = User::select('status')->distinct()->pluck('status');
+        $allDept = User::select('dept')->distinct()->pluck('dept');
+        $allJabatan = User::select('jabatan')->distinct()->pluck('jabatan');
 
         return view('dashboard', compact(
             'employees', 'status', 'dept', 'jabatan', 'search',
