@@ -12,6 +12,7 @@ use App\Http\Controllers\ImportController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\PerformancePeriodController;
 use App\Http\Controllers\ManagerAssessmentController;
+use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,8 @@ Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.
 Route::get('/settings/manager-assessment', [ManagerAssessmentController::class, 'index'])->name('settings.manager-assessment');
 
 Route::post('/settings/manager-assessment', [ManagerAssessmentController::class, 'store'])->name('settings.manager-assessment.store');
+
+Route::get('/summary/{id}', [SummaryController::class, 'index'])->name('summary');
 
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';

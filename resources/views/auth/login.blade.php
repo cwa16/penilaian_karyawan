@@ -11,13 +11,13 @@
 <body>
 
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center"
-     style="background-image:url('{{ asset('images/bskp.jpg') }}')">
+     style="background-image:url('{{ asset('images/bskp.png') }}')">
 
-    <div class="bg-white/20 backdrop-blur-md border border-white/40 
+    <div class="bg-white/20 backdrop-blur-md border border-white/40
                 rounded-xl p-8 w-full max-w-md shadow-2xl text-center">
 
         <!-- LOGO -->
-        <img src="{{ asset('images/logobskp.jpg') }}"
+        <img src="{{ asset('images/logobskp.svg') }}"
              class="w-48 mx-auto mb-6">
 
         <!-- FORM -->

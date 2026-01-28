@@ -35,6 +35,7 @@ public function roles(){
         'name',
         'status',
         'dept',
+        'dept_code',
         'jabatan',
         'pendidikan',
         'email',

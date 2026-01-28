@@ -24,6 +24,7 @@ return new class extends Migration
 
             // NIK penilai
             $table->string('evaluator_nik');
+            $table->integer('evaluator_order');
 
             $table->decimal('score', 3, 2); // 1.00 – 5.00
             $table->timestamps();

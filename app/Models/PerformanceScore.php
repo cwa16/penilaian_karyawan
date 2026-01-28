@@ -11,7 +11,7 @@ class PerformanceScore extends Model
         'criteria_id',
         'evaluator_nik',
         'score',
-        'slot',
+        'evaluator_order',
     ];
 
     public function criteria()
