@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <a href="/performance"
+                            <a href="{{ url()->previous() }}"
                                 class="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
                                 {{-- SVG icon --}}
                                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
