@@ -75,6 +75,6 @@ class SummaryController extends Controller
             ];
         }
 
-        return view('admin.performance.summary.index', compact('summary', 'criteria'));
+        return view('admin.performance.summary.index', compact('summary', 'criteria', 'period'));
     }
 }

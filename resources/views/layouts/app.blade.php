@@ -12,15 +12,25 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
+    <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-
 </head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.getElementById('auto-collapse-sidebar')) {
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar) return;
+            sidebar.classList.remove('w-60');
+            sidebar.classList.add('w-40');
+        }
+    });
+</script>
+
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @include('layouts.navigation')
-
 
         <!-- Page Heading -->
         @isset($header)
@@ -34,8 +44,10 @@
         <!-- Page Content -->
         <div class="flex min-h-screen bg-gray-100">
             @include('layouts.sidebar')
+
             <!-- MAIN -->
-            <main class="flex-1 p-8">
+            <!-- 🔴 SATU-SATUNYA PERUBAHAN ADA DI SINI -->
+            <main class="flex-1 p-8 overflow-hidden transition-all duration-300">
                 {{ $slot }}
             </main>
         </div>

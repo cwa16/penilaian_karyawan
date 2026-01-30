@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::prefix('admin/performance')->name('admin.performance.')->group(function () {
+    Route::resource('periods', PerformancePeriodController::class);
+});
 
 Route::get('/performance/input/{periodId}/{nik}', [PerformanceController::class, 'form'])->name('performance.input');
 Route::post('/performance/input/save', [PerformanceController::class, 'save']);
