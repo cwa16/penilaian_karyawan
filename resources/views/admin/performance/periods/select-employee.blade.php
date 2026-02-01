@@ -15,14 +15,14 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <a href="#"
+                   <a href="{{ route('admin.performance.periods.index') }}"
                         class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm border border-gray-200 hover:bg-gray-50">
                         <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
-                        Kembali ke Periode
+                    Kembali ke Periode
                     </a>
+
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
 
                 <div class="flex items-center gap-3">
                     <a href="#"
-                        class="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm border border-gray-200 hover:bg-gray-50">
+                        class="inline-flex items-center gap-2 px-3 py-2 bg-blue-100 text-gray-700 rounded-md text-sm border border-blue-200 hover:bg-blue-50">
                         <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5">
                             </path>
