@@ -61,5 +61,8 @@ Route::post('/settings/manager-assessment', [ManagerAssessmentController::class,
 
 Route::get('/summary/{id}', [SummaryController::class, 'index'])->name('summary');
 
+Route::get('/summary/{id}/export-excel', [SummaryController::class, 'exportExcel'])
+    ->name('summary.export.excel');
+    
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';
