@@ -17,7 +17,7 @@
                 <time datetime="{{ $period->end_date }}">{{ $period->end_date }}</time>
                 </span>
 
-                <a href="#"
+                <a href="{{ route('summary.export.excel', $period->id) }}"
                     class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5"></path>

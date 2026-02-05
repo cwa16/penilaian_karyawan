@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Exports\PerformanceSummaryExcelExport;
+use Maatwebsite\Excel\Excel;
 
 class SummaryController extends Controller
 {
@@ -76,5 +78,70 @@ class SummaryController extends Controller
         }
 
         return view('admin.performance.summary.index', compact('summary', 'criteria', 'period'));
+    }
+
+    public function exportExcel($periodId)
+    {
+        $period = DB::table('performance_periods')
+            ->where('id', $periodId)
+            ->first();
+
+        $assessments = DB::table('performance_assessments as pa')
+            ->join('users as u', 'u.nik', '=', 'pa.user_nik')
+            ->where('pa.period_id', $period->id)
+            ->select(
+                'pa.id as assessment_id',
+                'u.nik',
+                'u.name'
+            )
+            ->get();
+
+        $scores = DB::table('performance_scores')
+            ->whereIn('assessment_id', $assessments->pluck('assessment_id'))
+            ->get()
+            ->groupBy(['assessment_id', 'criteria_id']);
+
+        $criteria = DB::table('performance_criteria')
+            ->orderBy('id')
+            ->get();
+
+        $summary = collect();
+
+        foreach ($assessments as $a) {
+
+            $total = 0;
+
+            foreach ($criteria as $c) {
+
+                $scoreCollection =
+                    $scores[$a->assessment_id][$c->id] ?? collect();
+
+                $nilai1 = optional(
+                    $scoreCollection->firstWhere('evaluator_order', 1)
+                )->score ?? 0;
+
+                $nilai2 = optional(
+                    $scoreCollection->firstWhere('evaluator_order', 2)
+                )->score ?? 0;
+
+                $avg = collect([$nilai1, $nilai2])
+                    ->filter(fn($v) => $v > 0)
+                    ->avg() ?? 0;
+
+                $skor = ($avg * $c->weight) / 100;
+                $total += $skor;
+            }
+
+            $summary->push([
+                'nik'   => $a->nik,
+                'name'  => $a->name,
+                'total' => round($total, 2),
+            ]);
+        }
+
+        return app(Excel::class)->download(
+            new PerformanceSummaryExcelExport($summary),
+            'ringkasan-penilaian-'.$period->year.'.xlsx'
+        );
     }
 }
