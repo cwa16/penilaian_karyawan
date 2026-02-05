@@ -1,15 +1,22 @@
 <x-app-layout>
-    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+<div id="auto-collapse-sidebar" class="hidden"></div>
+<div class="max-w-full">
+    <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
         <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
             <div>
-                <h3 class="text-lg font-semibold text-slate-900">Ringkasan Penilaian</h3>
+                <h2 class="text-2xl font-semibold text-gray-800">
+                    Ringkasan Penilaian - {{ $period->year ?? \Carbon\Carbon::parse($period->start_date)->year }}
+                </h2>
                 <p class="text-sm text-slate-500 mt-0.5">Rekap nilai per karyawan berdasarkan kriteria dan bobot.</p>
             </div>
 
             <div class="flex items-center gap-3">
-                <span class="text-sm text-slate-500">Periode</span>
-                <div class="text-sm font-medium text-slate-700 bg-slate-50 px-3 py-1 rounded-md">
-                    {{ $period->name ?? '-' }}</div>
+                <span class="text-sm text-slate-500">Periode:
+                <time datetime="{{ $period->start_date }}">{{ $period->start_date }}</time>
+                <span class="mx-2 text-gray-300">—</span>
+                <time datetime="{{ $period->end_date }}">{{ $period->end_date }}</time>
+                </span>
+
                 <a href="#"
                     class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -20,11 +27,11 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto overscroll-x-contain">
             <table class="min-w-full text-sm border-collapse">
                 <thead class="bg-slate-50">
                     <tr class="border-b border-slate-200">
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-semibold text-slate-700 w-12">
+                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-semibold text-slate-700 w-12 ">
                             No</th>
                         <th scope="col" rowspan="2" class="px-4 py-4 text-left font-semibold text-slate-700">
                             Identitas Karyawan</th>
@@ -100,6 +107,19 @@
             <div class="text-sm">
                 {{-- Jika menggunakan pagination, ganti dengan links --}}
                 {{-- {{ $summary->links() }} --}}
+
+            <a href="{{ route('admin.performance.periods.index') }}"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm border border-gray-200 hover:bg-gray-50">
+    
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 19l-7-7 7-7" />
+                </svg>
+
+                Kembali Ke Periode
+            </a>
+
             </div>
         </div>
     </div>
