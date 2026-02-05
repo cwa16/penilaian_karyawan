@@ -15,6 +15,10 @@ use App\Http\Controllers\ManagerAssessmentController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PerformanceCriteriaController;
+
+#creteria
+Route::resource('criteria', PerformanceCriteriaController::class);
 
 Route::get('/upload', function () {return view('upload');});
 Route::post('/import-csv', [ImportController::class, 'import']);
