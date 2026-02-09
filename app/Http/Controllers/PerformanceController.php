@@ -5,7 +5,7 @@ use App\Models\PerformanceAssessment;
 use App\Models\PerformanceCriteria;
 use App\Models\PerformancePeriod;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
