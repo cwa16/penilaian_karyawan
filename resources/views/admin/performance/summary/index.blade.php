@@ -46,26 +46,26 @@
     </div>
         <div class="overflow-x-auto overscroll-x-contain overflow-hidden rounded-none">
             <table class="min-w-full text-sm border-collapse border border-white">
-                <thead class="bg-slate-50">
+                <thead>
                     <tr class="border-r border-slate-200">
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold w-12  border border-white bg-blue-200">
+                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold w-12  border border-white bg-gray-300">
                             NO</th>
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-center font-bold border border-white bg-blue-200">
+                        <th scope="col" rowspan="2" class="px-4 py-4 text-center font-bold border border-white bg-gray-300">
                             NIK</th>
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold border border-white bg-blue-200 whitespace-nowrap">
+                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold border border-white bg-gray-300 whitespace-nowrap">
                             Nama Karyawan</th>
                         
                         @php
                             $colors = [
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
-                                'bg-blue-200',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
+                                'bg-gray-300',
                             ];
                         @endphp
                             
@@ -84,11 +84,11 @@
                         @endforeach
 
                         <th scope="col" rowspan="2"
-                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-blue-200"
+                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-gray-300"
                             aria-label="Total skor">TOTAL
                         </th>
                         <th scope="col" rowspan="2"
-                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-blue-200"
+                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-gray-300"
                             aria-label="Total skor">PERSEN
                         </th>
                     </tr>
@@ -104,7 +104,7 @@
 
                 <tbody class="divide-y divide-slate-100 texs-[11px] leading-none">
                     @foreach ($summary as $i => $s)
-                        <tr class="hover:bg-slate-50 transition-colors duration-150 {{ $i % 2 == 0 ? 'bg-blue-100' : 'bg-blue-50' }}">
+                        <tr class="hover:bg-slate-50 transition-colors duration-150 {{ $i % 2 == 0 ? 'bg-gray-200' : 'bg-gray-100' }}">
                             <td class="px-2 py-[1px] text-slate-500 text-center border border-white">{{ $i + 1 }}</td>
                             <td class="px-2 py-[1px] text-slate-500 text-center whitespace-nowrap border border-white">{{ $s['nik'] }}</td>
                             <td class="px-2 py-[1px] border border-white">
