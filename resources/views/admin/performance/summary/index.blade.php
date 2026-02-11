@@ -28,6 +28,18 @@
         <div class="-mx-6 border-b border-slate-100 mt-4"></div>
         
         <div class="flex items-center justify-end gap-4 mt-4">
+            <div class="flex items-center gap-6 mr-auto">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm">Keterangan:</span>
+                    <span class="w-4 h-4 rounded-full bg-green-200"></span>
+                    <span class="text-sm">(N1) Penilai 1</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="w-4 h-4 rounded-full bg-green-400"></span>
+                    <span class="text-sm">(N2) Penilai 2</span>
+                </div>
+            </div>
             <div class="text-sm text-gray-500 mt-1 whitespace-nowrap">
                 Periode: 
                 <time datetime="{{ $period->start_date }}">{{ $period->start_date }}</time>
@@ -36,7 +48,7 @@
             </div>    
             
             <a href="{{ route('summary.export.excel', $period->id) }}"
-                class="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-900">
+                class="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5"></path>
                 </svg>
