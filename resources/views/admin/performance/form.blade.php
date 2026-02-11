@@ -11,30 +11,50 @@
                         Karyawan: <span class="font-medium text-gray-700">{{ $user->name }}</span>
                     </p>
                 </div>
-                
+          <div class="flex flex-col items-end gap-2">
+                {{-- Tombol Kembali (ATAS) --}}
+                <a href="{{ url()->previous() }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
+                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Kembali
+                </a>
 
-                <div class="flex items-center gap-4">
-                    <div class="text-sm">
-                        <div class="flex items-center gap-3">
-                            <div class="text-xs font-medium text-gray-500">Status</div>
-                            <div
-                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
-                        {{ $assessment->status == 'approved' ? 'bg-green-50 text-green-700' : ($assessment->status == 'rejected' ? 'bg-red-50 text-red-700' : 'bg-yellow-50 text-yellow-700') }}">
-                                {{ strtoupper($assessment->status) }}
-                            </div>
-                        </div>
+                {{-- Status + Evaluator (BAWAH, SEJAJAR) --}}
+                <div class="flex items-center gap-3 text-sm">
+                    {{-- Status --}}
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-medium text-gray-500">Status</span>
+                        <span
+                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+                            {{ $assessment->status == 'approved'
+                                ? 'bg-green-50 text-green-700'
+                                : ($assessment->status == 'rejected'
+                                    ? 'bg-red-50 text-red-700'
+                                    : 'bg-yellow-50 text-yellow-700') }}">
+                            {{ strtoupper($assessment->status) }}
+                        </span>
                     </div>
 
-                    <div class="text-sm">
-                        @if ($evaluatorOrder == 1)
-                            <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">Anda mengisi sebagai
-                                Evaluator 1</span>
-                        @else
-                            <span class="text-xs text-green-700 bg-green-50 px-2 py-1 rounded">Anda mengisi sebagai
-                                Evaluator 2</span>
-                        @endif
-                    </div>
+                    {{-- Separator --}}
+                    <span class="text-gray-400">|</span>
+
+                    {{-- Evaluator (LENGKAP) --}}
+                    @if ($evaluatorOrder == 1)
+                        <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                            Anda mengisi sebagai Evaluator 1
+                        </span>
+                    @else
+                        <span class="text-xs text-green-700 bg-green-50 px-2 py-1 rounded">
+                            Anda mengisi sebagai Evaluator 2
+                        </span>
+                    @endif
                 </div>
+            </div>
+
             </div>
 
             {{-- Body --}}
@@ -122,7 +142,7 @@
                                 <tr class="bg-gray-50">
                                     <td colspan="4" class="px-3 py-3 text-right text-sm text-gray-600 font-medium">
                                         TOTAL SKOR</td>
-                                    <td colspan="3" class="px-3 py-3 text-center text-lg font-bold text-gray-900">
+                                    <td colspan="3" class="px-3 py-3 text-right text-lg font-bold text-gray-900">
                                         {{ number_format($total, 2) }}
                                     </td>
                                 </tr>
@@ -138,17 +158,6 @@
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <a href="{{ url()->previous() }}"
-                                class="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">
-                                {{-- SVG icon --}}
-                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7"></path>
-                                </svg>
-                                Kembali
-                            </a>
-
                             <button type="submit"
                                 class="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,3 +200,5 @@
         });
     </script>
 </x-app-layout>
+
+
