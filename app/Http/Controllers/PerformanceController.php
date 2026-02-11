@@ -5,9 +5,9 @@ use App\Models\PerformanceAssessment;
 use App\Models\PerformanceCriteria;
 use App\Models\PerformancePeriod;
 use App\Models\User;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PerformanceController extends Controller
 {
@@ -66,7 +66,7 @@ class PerformanceController extends Controller
                         'assessment_id'   => $assessment->id,
                         'criteria_id'     => $criteriaId,
                         'evaluator_order' => $evaluatorOrder,
-                        'evaluator_nik' => $cekSlot->nik,
+                        'evaluator_nik'   => $cekSlot->nik,
                     ],
                     [
                         'score'      => $score,
