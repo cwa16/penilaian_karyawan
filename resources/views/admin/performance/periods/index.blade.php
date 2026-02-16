@@ -11,19 +11,31 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <a href="#"
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
+                   <a href="{{ route('admin.performance.periods.create') }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         Buat Periode
                     </a>
+
                 </div>
             </div>
 
             {{-- Body --}}
             <div class="px-6 py-6">
+                @if (session('success'))
+                    <div id="success-msg" class="mb-4 px-4 py-3 rounded-md bg-green-100 text-green-800">
+                        {{ session('success') }}
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            const msg = document.getElementById('success-msg');
+                            if(msg) msg.style.display = 'none';
+                        }, 4000);
+                    </script>
+                @endif
                 @if ($periods->isEmpty())
                     <div class="rounded-md bg-red-50 border border-red-100 p-4 flex items-start gap-3">
                         <div class="text-red-600">
@@ -83,6 +95,16 @@
                                                     </svg>
                                                     Summary
                                                 </a>
+                                                <form action="{{ route('admin.performance.periods.destroy', $p->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Yakin mau hapus periode ini?')"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="px-3 py-2 bg-red-100 text-red-600 rounded-md hover:bg-red-200 text-sm">
+                                                        🗑️
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
