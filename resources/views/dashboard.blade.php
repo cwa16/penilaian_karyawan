@@ -20,7 +20,7 @@
             </select>
 
             <select name="dept" onchange="this.form.submit()" class="border rounded px-3 py-1">
-                <option value="">Semua Bidang</option>
+                <option value="">Semua Dept</option>
                 @foreach ($allDept as $d)
                     <option value="{{ $d }}" {{ request('dept') == $d ? 'selected' : '' }}>
                         {{ $d }}
@@ -58,7 +58,7 @@
                         <th class="px-2 py-1 border">NIK</th>
                         <th class="px-2 py-1 border">Nama</th>
                         <th class="px-2 py-1 border">Status</th>
-                        <th class="px-2 py-1 border">Bidang</th>
+                        <th class="px-2 py-1 border">Dept</th>
                         <th class="px-2 py-1 border">Jabatan</th>
                         <th class="px-2 py-1 border">Pendidikan</th>
                         <th class="px-2 py-1 border text-center">Penilai</th>
