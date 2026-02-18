@@ -14,11 +14,14 @@
         <a href="{{ route('kpi.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('kpi.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             KPI Assessments
         </a>
-        <a href="{{ route('settings.manager-assessment') }}" class="block px-4 py-2 rounded {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
-            Manager Assessment Settings
+        <a href="{{ route('assessment.monitoring') }}" class="block px-4 py-2 rounded {{ request()->routeIs('monitoring.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
+            Monitoring
         </a>
         <a href="{{ route('criteria.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('criteria.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Master Criteria
+        </a>
+        <a href="{{ route('settings.manager-assessment') }}" class="block px-4 py-2 rounded {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
+            Manager Assessment Settings
         </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
