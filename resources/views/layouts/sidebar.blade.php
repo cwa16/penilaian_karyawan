@@ -12,11 +12,7 @@
            {{ request()->routeIs('dashboard') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
             Dashboard
         </a>
-
-        {{-- ASSESSMENTS --}}
-        <a href="{{ route('performance.periods') }}"
-           class="block px-4 py-2 rounded
-           {{ request()->routeIs('performance.periods') || request()->is('performance/periods*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+        <a href="{{ route('performance.periods') }}" class="block px-4 py-2 rounded {{ request()->routeIs('performance.*') || request()->routeIs('admin.performance.*') || request()->routeIs('summary') || request()->routeIs('summary.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Assessments
         </a>
 

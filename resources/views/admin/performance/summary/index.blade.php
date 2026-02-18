@@ -15,11 +15,10 @@
             </div>    
 
             <a href="{{ route('admin.performance.periods.index') }}"
-                class="inline-flex items-center gap-2 px-5 py-2 bg-gray-100 text-gray-900 rounded-lg text-xs border border-gray-200 hover:bg-gray-50">
-                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 19l-7-7 7-7" />
+                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-sm border hover:bg-gray-50">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 19l-7-7 7-7"></path>
                     </svg>
                 Kembali Ke Periode
             </a>
@@ -28,6 +27,19 @@
         <div class="-mx-6 border-b border-slate-100 mt-4"></div>
         
         <div class="flex items-center justify-end gap-4 mt-4">
+            <form method="GET" class="flex gap-2 items-center mr-auto">
+                <select name="dept" class="border rounded px-3 py-1 text-sm">
+                    <option value="">Semua Dept</option>
+                    @foreach ($allDept as $d)
+                        <option value="{{ $d }}" {{ request('dept') == $d ? 'selected' : '' }}>
+                            {{ $d }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                    Filter
+                </button>
+            </form>
             <div class="text-sm text-gray-500 mt-1 whitespace-nowrap">
                 Periode: 
                 <time datetime="{{ $period->start_date }}">{{ $period->start_date }}</time>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PerformancePeriod;
 use Illuminate\Http\Request;
 
+
 class PerformancePeriodController extends Controller
 {
     public function index()
@@ -12,24 +13,12 @@ class PerformancePeriodController extends Controller
         $periods = PerformancePeriod::orderBy('year', 'desc')->get();
         return view('admin.performance.periods.index', compact('periods'));
     }
-    #ini untuk menghapus periode
-   public function destroy(PerformancePeriod $period)
-{
-    $period->delete();
 
-    return redirect()->route('admin.performance.periods.index')
-                     ->with('success', 'Periode berhasil dihapus');
-}
-
-
-
-    // 🔹 Menampilkan form buat periode
     public function create()
     {
         return view('admin.performance.periods.create');
     }
 
-    // 🔹 Menyimpan data periode baru
     public function store(Request $request)
     {
         $request->validate([
@@ -49,4 +38,14 @@ class PerformancePeriodController extends Controller
         return redirect()->route('admin.performance.periods.index')
                          ->with('success', 'Periode berhasil ditambahkan');
     }
+
+    public function destroy($id)
+    {
+        $period = PerformancePeriod::findOrFail($id);
+        $period->delete();
+
+        return redirect()->route('admin.performance.periods.index')
+            ->with('success', 'Periode berhasil dihapus!');
+    }
+
 }

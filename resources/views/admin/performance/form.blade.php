@@ -4,7 +4,7 @@
 
             {{-- Header --}}
             <div class="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                
+
                 <div>
                     <h2 class="text-xl font-semibold text-gray-800">Penilaian Karyawan</h2>
 
@@ -71,7 +71,7 @@
 
             {{-- Body --}}
             <div class="px-6 py-4">
-                
+
                 <!-- @if (session('success'))
                     <div class="mb-3 p-2 bg-green-50 border border-green-200 text-green-800 rounded-md text-xs">
                         {{ session('success') }}

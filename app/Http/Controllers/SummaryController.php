@@ -9,14 +9,19 @@ use App\Models\Criteria;
 class SummaryController extends Controller
 {
     public function index($periodId)
-    {
+    {    
         $period = DB::table('performance_periods')
             ->where('id', $periodId)
             ->first();
 
+        $deptFilter = request('dept');
+
         $assessments = DB::table('performance_assessments as pa')
             ->join('users as u', 'u.nik', '=', 'pa.user_nik')
             ->where('pa.period_id', $period->id)
+            ->when($deptFilter, function($q) use ($deptFilter) {
+                $q->where('u.dept', $deptFilter);
+            })    
             ->select(
                 'pa.id as assessment_id',
                 'u.nik',
@@ -82,8 +87,13 @@ class SummaryController extends Controller
                 'total' => round($total, 2),
             ];
         }
+        $allDept = DB::table('users')
+                ->select('dept')
+                ->distinct()
+                ->orderBy('dept')
+                ->pluck('dept');
 
-        return view('admin.performance.summary.index', compact('summary', 'criteria', 'period'));
+        return view('admin.performance.summary.index', compact('summary', 'criteria', 'period', 'allDept'));
     }
 
 
