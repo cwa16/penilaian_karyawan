@@ -5,11 +5,7 @@
     </div>
 
     <nav class="p-4 space-y-2">
-
-        {{-- DASHBOARD --}}
-        <a href="{{ route('dashboard') }}"
-           class="block px-4 py-2 rounded
-           {{ request()->routeIs('dashboard') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+        <a href="{{ route('dashboard') }}" class="block px-4 py-2 rounded {{ request()->routeIs('dashboard') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Dashboard
         </a>
         <a href="{{ route('performance.periods') }}" class="block px-4 py-2 rounded {{ request()->routeIs('performance.*') || request()->routeIs('admin.performance.*') || request()->routeIs('summary') || request()->routeIs('summary.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
@@ -30,11 +26,12 @@
         </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit"
-                class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">
-                Log Out
-            </button>
-        </form>
 
+            <x-responsive-nav-link :href="route('logout')"
+                onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                {{ __('Log Out') }}
+            </x-responsive-nav-link>
+        </form>
     </nav>
 </aside>
