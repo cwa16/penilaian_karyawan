@@ -17,6 +17,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\PerformanceCriteriaController;
+use App\Http\Controllers\AssessmentMonitoringController;
+
+#monitoring
+Route::get('/assessment-monitoring', 
+    [AssessmentMonitoringController::class, 'index']
+)->name('assessment.monitoring');
 
 #creteria
 Route::resource('criteria', PerformanceCriteriaController::class);
