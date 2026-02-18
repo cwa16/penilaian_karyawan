@@ -9,7 +9,10 @@ class PerformanceCriteriaController extends Controller
 {
     public function index()
     {
-        $criteria = PerformanceCriteria::orderBy('code')->get();
+       $criteria = PerformanceCriteria::with('scales')
+        ->orderByRaw('CAST(SUBSTRING(code, 2) AS UNSIGNED)')
+        ->get();
+
         return view('criteria.index', compact('criteria'));
     }
 
