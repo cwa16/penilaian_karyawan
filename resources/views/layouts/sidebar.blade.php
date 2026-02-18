@@ -12,7 +12,7 @@
             Assessments
         </a>
         <a href="{{ route('kpi.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('kpi.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
-            Penilai KPI
+            KPI Assessments
         </a>
         <a href="{{ route('settings.manager-assessment') }}" class="block px-4 py-2 rounded {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Manager Assessment Settings
