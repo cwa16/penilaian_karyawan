@@ -16,7 +16,11 @@ use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerformanceCriteriaController;
+use App\Http\Controllers\KpiController;
 
+Route::get('/kpi', [KpiController::class, 'index'])->name('kpi.index');
+Route::post('/kpi/import', [KpiController::class, 'import'])->name('kpi.import');
+Route::get('/kpi/{id}', [KpiController::class, 'show'])->name('kpi.show');
 #creteria
 Route::resource('criteria', PerformanceCriteriaController::class);
 
