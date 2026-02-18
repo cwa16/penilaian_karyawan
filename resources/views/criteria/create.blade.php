@@ -2,7 +2,7 @@
 <div class="max-w-3xl mx-auto p-6">
     <div class="bg-white shadow rounded-lg p-6">
 
-        <h2 class="text-2xl font-semibold text-gray-800">Tambah Criteria</h2>
+        <h2 class="text-xl font-semibold mb-4">Tambah Kriteria</h2>
 
         <form action="{{ route('criteria.store') }}" method="POST" class="space-y-4">
             @csrf

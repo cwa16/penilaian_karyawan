@@ -15,14 +15,16 @@ use App\Http\Controllers\ManagerAssessmentController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PerformanceCriteriaController;
 use App\Http\Controllers\KpiController;
+use App\Http\Controllers\PerformanceCriteriaController;
 
+#creteria
+Route::resource('criteria', PerformanceCriteriaController::class);
+
+#KPI
 Route::get('/kpi', [KpiController::class, 'index'])->name('kpi.index');
 Route::post('/kpi/import', [KpiController::class, 'import'])->name('kpi.import');
 Route::get('/kpi/{id}', [KpiController::class, 'show'])->name('kpi.show');
-#creteria
-Route::resource('criteria', PerformanceCriteriaController::class);
 
 Route::get('/upload', function () {return view('upload');});
 Route::post('/import-csv', [ImportController::class, 'import']);
@@ -77,6 +79,6 @@ Route::get(
     [\App\Http\Controllers\SummaryController::class, 'detail']
 )->name('summary.detail');
 
-    
+
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';
