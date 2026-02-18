@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-6xl mx-auto p-4">
+    <div class="max-w-6xl mx-auto">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
 
             {{-- Header --}}

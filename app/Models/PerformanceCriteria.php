@@ -14,10 +14,9 @@ class PerformanceCriteria extends Model
         'description',
         'weight',
     ];
-public function scales()
-{
-    return $this->hasMany(PerformanceScaleDescription::class, 'criteria_id');
-}
 
-
+    public function scales()
+    {
+        return $this->hasMany(PerformanceScaleDescription::class, 'criteria_id');
+    }
 }
