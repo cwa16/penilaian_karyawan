@@ -24,7 +24,7 @@
         <a href="{{ route('kpi.index') }}"
            class="block px-4 py-2 rounded
            {{ request()->routeIs('kpi.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
-            Penilai KPI
+            KPI Asessment
         </a>
 
         {{-- MANAGER ASSESSMENT SETTINGS --}}
