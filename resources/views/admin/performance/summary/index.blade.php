@@ -28,18 +28,6 @@
         <div class="-mx-6 border-b border-slate-100 mt-4"></div>
         
         <div class="flex items-center justify-end gap-4 mt-4">
-            <div class="flex items-center gap-6 mr-auto">
-                <div class="flex items-center gap-2">
-                    <span class="text-sm">Keterangan:</span>
-                    <span class="w-4 h-4 rounded-full bg-green-200"></span>
-                    <span class="text-sm">(N1) Penilai 1</span>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <span class="w-4 h-4 rounded-full bg-green-400"></span>
-                    <span class="text-sm">(N2) Penilai 2</span>
-                </div>
-            </div>
             <div class="text-sm text-gray-500 mt-1 whitespace-nowrap">
                 Periode: 
                 <time datetime="{{ $period->start_date }}">{{ $period->start_date }}</time>
@@ -60,12 +48,14 @@
             <table class="min-w-full text-sm border-collapse border border-white">
                 <thead>
                     <tr class="border-r border-slate-200">
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold w-12  border border-white bg-gray-300">
+                        <th scope="col" rowspan="2" class="px-2 py-1 text-center text-xs w-12  border border-white bg-gray-300">
                             NO</th>
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-center font-bold border border-white bg-gray-300">
+                        <th scope="col" rowspan="2" class="px-2 py-1 text-center text-xs border border-white bg-gray-300">
                             NIK</th>
-                        <th scope="col" rowspan="2" class="px-4 py-4 text-left font-bold border border-white bg-gray-300 whitespace-nowrap">
+                        <th scope="col" rowspan="2" class="px-2 py-1 text-center text-xs border border-white bg-gray-300 whitespace-nowrap">
                             Nama Karyawan</th>
+                        <th scope="col" rowspan="2" class="px-2 py-1 text-center text-xs border border-white bg-gray-300 whitespace-nowrap">
+                            Departemen</th>
                         
                         @php
                             $colors = [
@@ -83,12 +73,12 @@
                             
                         @foreach ($criteria as $index => $c)
                             <th scope="col" colspan="3" 
-                            class="px-4 py-3 text-center border border-white {{ $colors[$index % count($colors)] }}">
-                                <div class="flex flex-col items-center">
+                            class="px-2 py-1 text-center border border-white {{ $colors[$index % count($colors)] }}">
+                                <div class="flex items-center justify-center space-x-2">
                                     <span
-                                        class="block text-slate-900 uppercase tracking-wider text-xs">{{ $c->name }}</span>
+                                        class="uppercase tracking-wider text-xs">{{ $c->name }}</span>
                                     <span
-                                        class="mt-1 inline-flex items-center text-[11px] font-medium text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">
+                                        class="mt-1 inline-flex items-center text-[11px] font-medium">
                                         {{ number_format($c->weight, 0) }}%
                                     </span>
                                 </div>
@@ -96,20 +86,20 @@
                         @endforeach
 
                         <th scope="col" rowspan="2"
-                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-gray-300"
+                            class="px-3 py-2 text-center font-bold text-xs bg-slate-100/50 border border-white w-28 bg-gray-300"
                             aria-label="Total skor">TOTAL
                         </th>
                         <th scope="col" rowspan="2"
-                            class="px-6 py-4 text-center font-bold text-slate-900 bg-slate-100/50 border border-white w-28 bg-gray-300"
+                            class="px-3 py-2 text-center font-bold text-xs bg-slate-100/50 border border-white w-28 bg-gray-300"
                             aria-label="Total skor">PERSEN
                         </th>
                     </tr>
 
                     <tr class="bg-slate-50/50 border border-black">
                         @foreach ($criteria as $c)
-                            <th class="px-3 py-2 text-[11px] font-medium text-slate-500 text-center border border-white bg-green-200">N1</th>
-                            <th class="px-3 py-2 text-[11px] font-medium text-slate-500 text-center border border-white bg-green-300">N2</th>
-                            <th class="px-3 py-2 text-[11px] font-semibold text-indigo-700 text-center border border-white bg-red-200">SKOR</th>
+                            <th class="px-2 py-1 text-[11px] font-medium text-slate-500 text-center border border-white bg-gray-300">N1</th>
+                            <th class="px-2 py-1 text-[11px] font-medium text-slate-500 text-center border border-white bg-gray-300">N2</th>
+                            <th class="px-2 py-1 text-[11px] font-semibold text-indigo-700 text-center border border-white bg-gray-300">SKOR</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -117,43 +107,52 @@
                 <tbody class="divide-y divide-slate-100 texs-[11px] leading-none">
                     @foreach ($summary as $i => $s)
                         <tr class="hover:bg-slate-50 transition-colors duration-150 {{ $i % 2 == 0 ? 'bg-gray-200' : 'bg-gray-100' }}">
-                            <td class="px-2 py-[1px] text-slate-500 text-center border border-white">{{ $i + 1 }}</td>
-                            <td class="px-2 py-[1px] text-slate-500 text-center whitespace-nowrap border border-white">{{ $s['nik'] }}</td>
-                            <td class="px-2 py-[1px] border border-white">
-                                <div class="font-medium text-slate-900 whitespace-nowrap">{{ $s['name'] }}</div>
+                            <td class="px-2 py-0.5 text-slate-500 text-center border border-white">{{ $i + 1 }}</td>
+                            <td class="px-2 py-0.5 text-slate-500 text-center whitespace-nowrap border border-white">{{ $s['nik'] }}</td>
+                            <td class="px-2 py-0.5 border border-white">
+                                <div class="whitespace-nowrap">
+                                    <a href="{{ route('summary.detail', $s['assessment_id']) }}"
+                                    class="hover:underline font-semibold">
+                                        {{ $s['name'] }}
+                                    </a>
+                                </div>
                                 @if (!empty($s['meta']))
-                                    <div class="text-xs text-slate-400 mt-0">{{ $s['meta'] }}</div>
+                                    <div class="text-medium text-slate-500">{{ $s['meta'] }}</div>
                                 @endif
                             </td>
 
+                            <td class="px-2 py-0.5 border border-white whitespace-nowrap">
+                                {{ $s['dept'] ?? '-' }}
+                            </td>
+
                             @foreach ($criteria as $c)
-                                <td class="px-2 py-[1px] text-center text-slate-600 border border-white">
+                                <td class="px-2 py-0.5 text-center border border-white">
                                     {{ intval($s['rows'][$c->id]['nilai1'] ?? 0) }}</td>
-                                <td class="px-2 py-[1px] text-center text-slate-600 border border-white">
+                                <td class="px-2 py-0.5 text-center border border-white">
                                     {{ intval($s['rows'][$c->id]['nilai2'] ?? 0)}}</td>
                                 <td
-                                    class="px-2 py-[1px] text-center font-medium text-indigo-600 bg-indigo-50/20 border border-white">
+                                    class="px-2 py-0.5 text-center font-medium text-indigo-600 bg-indigo-50/20 border border-white">
                                     {{ rtrim(rtrim(number_format($s['rows'][$c->id]['skor'] ?? 0, 2), '0'), '.') }}
                                 </td>
                             @endforeach
 
                             @php
                                 // Ambil nilai total
-                                $nilaiTotal = $s['total'] ?? 0;
+                                $nilaiTotal = $s['total'];
 
                                 // Hitung persen: total dibagi 5 lalu dikali 100
                                 $persenTotal = ($nilaiTotal / 5) * 100;
                             @endphp
 
-                            <td class="px-2 py-[1px] text-center font-bold text-slate-900 bg-slate-50/50 border border-white">
+                            <td class="px-2 py-0.5 text-center text-slate-900 bg-slate-50/50 border border-white">
                                 <span
-                                    class="inline-block px-3 py-1 rounded-md bg-white shadow-sm">
+                                    class="rounded-md shadow-sm">
                                     {{ number_format($nilaiTotal, 2) }}
                                 </span>
                             </td>
-                            <td class="px-2 py-[1px] text-center font-bold text-slate-900 bg-slate-50/50 border border-white">
+                            <td class="px-2 py-0.5 text-center text-slate-900 bg-slate-50/50 border border-white">
                                 <span
-                                    class="inline-block px-3 py-1 rounded-md bg-white shadow-sm">
+                                    class="rounded-md shadow-sm">
                                     {{ number_format($persenTotal, 0) }}%
                                 </span>
                             </td>

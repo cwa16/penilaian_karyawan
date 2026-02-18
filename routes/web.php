@@ -71,6 +71,12 @@ Route::get('/summary/{id}', [SummaryController::class, 'index'])->name('summary'
 
 Route::get('/summary/{id}/export-excel', [SummaryController::class, 'exportExcel'])
     ->name('summary.export.excel');
+
+Route::get(
+    '/summary/{assessment}/detail',
+    [\App\Http\Controllers\SummaryController::class, 'detail']
+)->name('summary.detail');
+
     
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';
