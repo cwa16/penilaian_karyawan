@@ -21,27 +21,27 @@
 
     {{-- IDENTITAS --}}
     <div class="grid grid-cols-2 gap-y-2 mb-6">
-        <div class="flex gap-2">
+        <div class="flex gap-0.5">
             <div class="w-28">NIK</div>
             <div>: {{ $employee->nik }}</div>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex gap-0.5">
             <div class="w-28">Dept</div>
             <div>: {{ $employee->dept }}</div>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex gap-0.5">
             <div class="w-28">Nama</div>
             <div>: {{ $employee->name }}</div>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex gap-0.5">
             <div class="w-28">Jabatan</div>
             <div>: {{ $employee->jabatan ?? '-' }}</div>
         </div>
 
-        <div class="flex gap-2 col-span-2">
+        <div class="flex gap-0.5 col-span-2">
             <div class="w-28">Mulai Kerja</div>
             <div>: -</div>
         </div>

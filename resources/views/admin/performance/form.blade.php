@@ -102,8 +102,8 @@
                             <thead class="bg-gray-900 text-white">
                                 <tr>
                                     <th class="px-3 py-2 w-12 text-left">No</th>
-                                    <th class="px-3 py-2 text-left">Kriteria</th>
-                                    <th class="px-3 py-2 text-left">Deskripsi</th>
+                                    <th class="px-3 py-2 text-left">Name</th>
+                                    <th class="px-3 py-2 text-left">Description</th>
                                     <th class="px-3 py-2 text-center w-20">Bobot</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 1</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 2</th>
