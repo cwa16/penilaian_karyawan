@@ -85,15 +85,15 @@
                     {{-- Keterangan Nilai --}}
                     <div class="mb-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-600">
                         <div class="flex flex-wrap gap-x-3 gap-y-1">
-                            <span><strong>1</strong> Kurang (B-)</span>
+                            <span><strong>1</strong> Kurang (I)</span>
                             <span>|</span>
-                            <span><strong>2</strong> Cukup (B)</span>
+                            <span><strong>2</strong> Cukup (II)</span>
                             <span>|</span>
-                            <span><strong>3</strong> Baik (B+)</span>
+                            <span><strong>3</strong> Baik (III)</span>
                             <span>|</span>
-                            <span><strong>4</strong> Sangat Baik (A)</span>
+                            <span><strong>4</strong>  Baik Sekali (IV)</span>
                             <span>|</span>
-                            <span><strong>5</strong> Sempurna (S)</span>
+                            <span><strong>5</strong> Istimewa (V)</span>
                         </div>
                     </div>
 

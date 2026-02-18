@@ -15,8 +15,12 @@
         <a href="{{ route('performance.periods') }}" class="block px-4 py-2 rounded {{ request()->routeIs('performance.*') || request()->routeIs('admin.performance.*') || request()->routeIs('summary') || request()->routeIs('summary.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Assessments
         </a>
-        <a href="{{ route('kpi.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('kpi.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
-            KPI Assessments
+
+        {{-- PENILAI KPI --}}
+        <a href="{{ route('kpi.index') }}"
+           class="block px-4 py-2 rounded
+           {{ request()->routeIs('kpi.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+            KPI Asessment
         </a>
         <a href="{{ route('settings.manager-assessment') }}" class="block px-4 py-2 rounded {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Manager Assessment Settings
