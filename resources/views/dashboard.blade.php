@@ -1,6 +1,20 @@
 <x-app-layout>
-
-    <!-- HEADER -->
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Dashboard</h1>
         <p class="text-gray-600 text-sm">Welcome, {{ auth()->user()->name }}</p>
@@ -67,14 +81,14 @@
 
                 <tbody>
                     @forelse($employees as $emp)
-                        <tr class="hover:bg-gray-50 h-8">
-                            <td class="px-2 py-1 border">{{ $emp->nik }}</td>
-                            <td class="px-2 py-1 border font-medium">{{ $emp->name }}</td>
-                            <td class="px-2 py-1 border">{{ $emp->status }}</td>
-                            <td class="px-2 py-1 border">{{ $emp->dept }}</td>
-                            <td class="px-2 py-1 border">{{ $emp->jabatan }}</td>
-                            <td class="px-2 py-1 border">{{ $emp->pendidikan }}</td>
-                            <td class="px-2 py-1 border text-center">
+                        <tr class="hover:bg-gray-50 h-8 text-xs">
+                            <td class="px-2 py-0.5 border text-center">{{ $emp->nik }}</td>
+                            <td class="px-2 py-0.5 border font-medium">{{ $emp->name }}</td>
+                            <td class="px-2 py-0.5 border">{{ $emp->status }}</td>
+                            <td class="px-2 py-0.5 border">{{ $emp->dept }}</td>
+                            <td class="px-2 py-0.5 border">{{ $emp->jabatan }}</td>
+                            <td class="px-2 py-0.5 border">{{ $emp->pendidikan }}</td>
+                            <td class="px-2 py-0.5 border text-center">
                                 <button
                                     onclick="alert('Fitur penilaian akan segera tersedia')"
                                     class="bg-blue-600 text-white px-2 py-0.5 rounded text-xs hover:bg-blue-700"

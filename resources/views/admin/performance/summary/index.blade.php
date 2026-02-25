@@ -1,4 +1,20 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
 <div id="auto-collapse-sidebar" class="hidden"></div>
 <div class="max-w-full">
 <div class="rounded-xl border border-slate-200 bg-white shadow-lg">
@@ -15,7 +31,7 @@
             </div>    
 
             <a href="{{ route('admin.performance.periods.index') }}"
-                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-sm border hover:bg-gray-50">
+                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-md text-sm text-gray-700 border hover:bg-gray-200 shadow">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 19l-7-7 7-7"></path>
@@ -28,7 +44,7 @@
         
         <div class="flex items-center justify-end gap-4 mt-4">
             <form method="GET" class="flex gap-2 items-center mr-auto">
-                <select name="dept" class="border rounded px-3 py-1 text-sm">
+                <select name="dept" class="border rounded px-3 py-1 text-sm shadow-md">
                     <option value="">Semua Dept</option>
                     @foreach ($allDept as $d)
                         <option value="{{ $d }}" {{ request('dept') == $d ? 'selected' : '' }}>
@@ -36,7 +52,7 @@
                         </option>
                     @endforeach
                 </select>
-                <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm shadow-md">
                     Filter
                 </button>
             </form>
@@ -48,7 +64,7 @@
             </div>    
             
             <a href="{{ route('summary.export.excel', $period->id) }}"
-                class="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
+                class="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 shadow">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7H5"></path>
                 </svg>
@@ -90,7 +106,7 @@
                                     <span
                                         class="uppercase tracking-wider text-xs">{{ $c->name }}</span>
                                     <span
-                                        class="mt-1 inline-flex items-center text-[11px] font-medium">
+                                        class="mt-1 inline-flex items-center text-[11px] font-medium hidden">
                                         {{ number_format($c->weight, 0) }}%
                                     </span>
                                 </div>
@@ -120,7 +136,7 @@
                     @foreach ($summary as $i => $s)
                         <tr class="hover:bg-slate-50 transition-colors duration-150 {{ $i % 2 == 0 ? 'bg-gray-200' : 'bg-gray-100' }}">
                             <td class="px-2 py-0.5 text-slate-500 text-center border border-white">{{ $i + 1 }}</td>
-                            <td class="px-2 py-0.5 text-slate-500 text-center whitespace-nowrap border border-white">{{ $s['nik'] }}</td>
+                            <td class="px-2 py-0.5 text-center whitespace-nowrap border border-white">{{ $s['nik'] }}</td>
                             <td class="px-2 py-0.5 border border-white">
                                 <div class="whitespace-nowrap">
                                     <a href="{{ route('summary.detail', $s['assessment_id']) }}"

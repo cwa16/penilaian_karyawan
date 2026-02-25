@@ -1,4 +1,20 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-6xl mx-auto">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
 
@@ -6,7 +22,7 @@
             <div class="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">Penilaian Karyawan</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800">Penilaian Karyawan</h2>
 
                     <div class="mt-2 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-1 text-xs">
                         <div>
@@ -33,8 +49,8 @@
 
                 <div class="flex flex-col items-end gap-2">
                     <a href="{{ url()->previous() }}"
-                        class="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-xs text-gray-700 hover:bg-gray-50">
-                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-md text-sm border text-gray-700 hover:bg-gray-200 shadow">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 19l-7-7 7-7"></path>
                         </svg>
@@ -55,7 +71,7 @@
 
                         <span class="text-gray-300">|</span>
 
-                      @if ($evaluatorOrder == 1)
+                    @if ($evaluatorOrder == 1)
                         <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
                             Anda mengisi sebagai Evaluator 1
                         </span>
@@ -83,17 +99,17 @@
                     <input type="hidden" name="assessment_id" value="{{ $assessment->id }}">
 
                     {{-- Keterangan Nilai --}}
-                    <div class="mb-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-600">
+                    <div class="mb-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs shadow">
                         <div class="flex flex-wrap gap-x-3 gap-y-1">
-                            <span><strong>1</strong> Kurang (B-)</span>
-                            <span>|</span>
-                            <span><strong>2</strong> Cukup (B)</span>
-                            <span>|</span>
-                            <span><strong>3</strong> Baik (B+)</span>
-                            <span>|</span>
-                            <span><strong>4</strong> Sangat Baik (A)</span>
-                            <span>|</span>
-                            <span><strong>5</strong> Sempurna (S)</span>
+                            <span>Kurang  <strong>I</strong></span>
+                            <span>  </span>
+                            <span>Cukup  <strong>II</strong></span>
+                            <span>  </span>
+                            <span>Baik  <strong>III</strong></span>
+                            <span>  </span>
+                            <span>Sangat Baik  <strong>IV</strong></span>
+                            <span>  </span>
+                            <span>Istimewa  <strong>V</strong></span>
                         </div>
                     </div>
 
@@ -104,7 +120,6 @@
                                     <th class="px-3 py-2 w-12 text-left">No</th>
                                     <th class="px-3 py-2 text-left">Name</th>
                                     <th class="px-3 py-2 text-left">Description</th>
-                                    <th class="px-3 py-2 text-center w-20">Bobot</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 1</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 2</th>
                                     <th class="px-3 py-2 text-center w-20">Skor</th>
@@ -127,11 +142,6 @@
                                         <td class="px-3 py-2 text-center text-gray-600">{{ $i + 1 }}</td>
                                         <td class="px-3 py-2 font-medium text-gray-800">{{ $c->name }}</td>
                                         <td class="px-3 py-2 text-gray-500">{{ $c->description }}</td>
-
-                                        <td class="px-3 py-2 text-center text-gray-700">
-                                            {{ number_format($c->weight, 0) }}%
-                                        </td>
-
                                         <td class="px-3 py-2">
                                             <input type="number" min="1" max="5"
                                                 name="scores[{{ $c->id }}][1]" value="{{ $nilai1 }}"
@@ -173,7 +183,7 @@
 
                     <div class="mt-4 flex justify-end">
                         <button type="submit"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 shadow-md">
                             Simpan
                         </button>
                     </div>

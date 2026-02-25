@@ -1,6 +1,21 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto p-6">
-
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold">Daftar Karyawan</h2>
 

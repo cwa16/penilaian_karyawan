@@ -1,7 +1,23 @@
 <x-app-layout>
-    <div class="max-w-6xl mx-auto p-6">
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto">
 
-        <h2 class="text-xl font-semibold mb-4">
+        <h2 class="text-2xl font-semibold mb-4">
             Setting Penilaian Manager
         </h2>
 
@@ -27,7 +43,7 @@
                 </select>
             </div>
 
-            <div class="bg-white shadow rounded p-4">
+            <div class="bg-white shadow rounded p-5">
                 <p class="text-sm font-medium mb-2">
                     Departemen yang boleh dinilai
                 </p>
@@ -41,7 +57,7 @@
                     @endforeach
                 </div>
 
-                <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">
+                <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow">
                     Simpan Setting
                 </button>
             </div>

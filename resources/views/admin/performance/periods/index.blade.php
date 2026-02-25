@@ -1,4 +1,21 @@
 <x-app-layout>
+    <div x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-10xl mx-auto">
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             {{-- Header --}}
@@ -10,16 +27,15 @@
                         penilaian.</p>
                 </div>
 
-                <div class="flex items-center gap-3">
-                   <a href="{{ route('admin.performance.periods.create') }}"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Buat Periode
-                    </a>
-
-                </div>
+                <button 
+                    @click="open = true"
+                    type="button"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 shadow">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Buat Periode
+                </button>
             </div>
 
             {{-- Body --}}
@@ -52,8 +68,8 @@
                     </div>
                 @else
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm">
-                            <thead class="bg-gray-900 text-white">
+                        <table class="min-w-full text-sm border-collapse shadow-md">
+                            <thead class="bg-gray-300">
                                 <tr>
                                     <th class="px-4 py-3 text-left w-24">Tahun</th>
                                     <th class="px-4 py-3 text-left">Nama</th>
@@ -76,7 +92,7 @@
                                         <td class="px-4 py-3 text-center">
                                             <div class="inline-flex items-center gap-2">
                                                 <a href="/performance/{{ $p->id }}/employees"
-                                                    class="inline-flex items-center gap-2 px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
+                                                    class="inline-flex items-center gap-2 px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 shadow">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -86,7 +102,7 @@
                                                 </a>
 
                                                 <a href="{{ route('summary', $p->id) }}"
-                                                    class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-800 rounded-md text-sm border border-gray-200 hover:bg-gray-50">
+                                                    class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-800 rounded-md text-sm border border-gray-200 hover:bg-gray-50 shadow">
                                                     <svg class="w-4 h-4 text-gray-600" fill="none"
                                                         stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,8 +117,16 @@
                                                     style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="px-3 py-2 bg-red-100 text-red-600 rounded-md hover:bg-red-200 text-sm">
-                                                        🗑️
+                                                    <button type="submit"
+                                                        class="p-2 rounded-md bg-red-500 hover:bg-red-600 transition shadow">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24"
+                                                            class="w-5 h-5 text-white"
+                                                            fill="currentColor">
+                                                            <path d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v8h-2V9zm4 0h2v8h-2V9zM7 9h2v8H7V9z"/>
+                                                        </svg>
+
                                                     </button>
                                                 </form>
                                             </div>
@@ -120,5 +144,35 @@
                 @endif
             </div>
         </div>
-    </div>
+            </div>
+                <!-- BACKDROP -->
+                <div 
+                    x-show="open"
+                    x-cloak
+                    x-transition.opacity
+                    class="fixed inset-0 bg-black/50 backdrop-blur-fix z-[90]"
+                    @click="open = false">
+                </div>
+
+                <!-- MODAL -->
+                <div 
+                    x-show="open"
+                    x-cloak
+                    x-transition
+                    class="fixed inset-0 flex items-center justify-center z-[100] p-4">
+
+                    <div class="bg-white w-full max-w-2xl rounded-xl shadow-2xl relative">
+
+                        <button 
+                            @click="open = false"
+                            class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+                            ✕
+                        </button>
+
+                        @include('admin.performance.periods.create')
+
+                    </div>
+                </div>
+            </div>
+        </div>
 </x-app-layout>
