@@ -17,13 +17,24 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerformanceCriteriaController;
 use App\Http\Controllers\KpiController;
+use App\Http\Controllers\AssessmentMonitoringController;
+
+Route::get('/criteria/export/pdf',
+    [PerformanceCriteriaController::class, 'exportPdf']
+)->name('criteria.export.pdf');
+#monitoring
+Route::get('/assessment-monitoring', 
+    [AssessmentMonitoringController::class, 'index']
+)->name('assessment.monitoring');
 
 Route::get('/kpi', [KpiController::class, 'index'])->name('kpi.index');
 Route::post('/kpi/import', [KpiController::class, 'import'])->name('kpi.import');
 Route::get('/kpi/{id}', [KpiController::class, 'show'])->name('kpi.show');
 #creteria
-Route::resource('criteria', PerformanceCriteriaController::class);
-
+Route::resource('criteria', PerformanceCriteriaController::class)
+    ->parameters([
+        'criteria' => 'criteria'
+    ]);
 Route::get('/upload', function () {return view('upload');});
 Route::post('/import-csv', [ImportController::class, 'import']);
 

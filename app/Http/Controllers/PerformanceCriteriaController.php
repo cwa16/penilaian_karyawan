@@ -1,39 +1,72 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PerformanceCriteria;
 use Illuminate\Http\Request;
-
+use App\Models\PerformanceScaleDescription;
 class PerformanceCriteriaController extends Controller
 {
-    public function index()
-    {
-       $criteria = PerformanceCriteria::with('scales')
+  public function exportPdf()
+{
+    $criteria = PerformanceCriteria::with('scales')
         ->orderByRaw('CAST(SUBSTRING(code, 2) AS UNSIGNED)')
         ->get();
 
-        return view('criteria.index', compact('criteria'));
-    }
+    $pdf = Pdf::loadView('criteria.export_pdf', compact('criteria'))
+        ->setPaper('a4', 'landscape');
 
-    public function create()
-    {
-        return view('criteria.create');
-    }
+    return $pdf->download('master-criteria.pdf');
+}
 
+ 
+ public function index()
+        {
+            $criteria = PerformanceCriteria::with('scales')
+                            ->orderBy('id')
+                            ->get();   // ⬅️ TIDAK ADA groupBy
+
+            return view('criteria.index', compact('criteria'));
+        }
+            public function create()
+        {
+            $sections = \App\Models\PerformanceCriteria::select('section')
+                            ->distinct()
+                            ->orderBy('section')
+                            ->pluck('section');
+
+            return view('criteria.create', compact('sections'));
+        }
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|unique:performance_criteria,code',
-            'name' => 'required',
-            'description' => 'nullable',
-            'weight' => 'required|numeric|min:1|max:100'
+        // 1️⃣ Simpan data utama ke performance_criteria
+       $criteria = PerformanceCriteria::create([
+            'section' => $request->section,
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->definition,
+            'weight' => 0,
         ]);
 
-        PerformanceCriteria::create($request->all());
+        // 2️⃣ Simpan score 1–5 ke performance_scale_descriptions
+       $scales = [
+            1 => $request->score_1,
+            2 => $request->score_2,
+            3 => $request->score_3,
+            4 => $request->score_4,
+            5 => $request->score_5,
+        ];
+
+        foreach ($scales as $score => $desc) {
+            PerformanceScaleDescription::create([
+                'criteria_id' => $criteria->id,
+                'score' => $score,
+                'description' => $desc,
+            ]);
+        }
 
         return redirect()->route('criteria.index')
-            ->with('success', 'Kriteria berhasil ditambahkan');
+            ->with('success', 'Data berhasil disimpan');
     }
 
     public function edit($id)
@@ -42,23 +75,38 @@ class PerformanceCriteriaController extends Controller
         return view('criteria.edit', compact('criteria'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $criteria = PerformanceCriteria::findOrFail($id);
+ public function update(Request $request, PerformanceCriteria $criteria)
+{
+    $request->validate([
+        'section' => 'required',
+        'code' => 'required',
+        'name' => 'required',
+    ]);
 
-        $request->validate([
-            'code' => 'required|unique:performance_criteria,code,' . $id,
-            'name' => 'required',
-            'description' => 'nullable',
-            'weight' => 'required|numeric|min:1|max:100'
-        ]);
+    $criteria->update([
+        'section' => $request->section,
+        'code' => $request->code,
+        'name' => $request->name,
+        'description' => $request->description,
+    ]);
 
-        $criteria->update($request->all());
-
-        return redirect()->route('criteria.index')
-            ->with('success', 'Kriteria berhasil diupdate');
+    if ($request->scales) {
+        foreach ($request->scales as $score => $description) {
+            $criteria->scales()->updateOrCreate(
+                [
+                    'criteria_id' => $criteria->id,
+                    'score' => $score
+                ],
+                [
+                    'description' => $description
+                ]
+            );
+        }
     }
 
+    return redirect()->route('criteria.index')
+        ->with('success', 'Kriteria berhasil diupdate.');
+}
     public function destroy($id)
     {
         PerformanceCriteria::destroy($id);

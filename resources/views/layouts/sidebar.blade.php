@@ -27,11 +27,11 @@
             KPI Asessment
         </a>
 
-        {{-- MANAGER ASSESSMENT SETTINGS --}}
-        <a href="{{ route('settings.manager-assessment') }}"
+        {{-- MONITORING --}}
+        <a href="{{ route('assessment.monitoring') }}"
            class="block px-4 py-2 rounded
-           {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
-            Manager Assessment Settings
+           {{ request()->routeIs('assessment.monitoring.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+            Monitoring
         </a>
 
         {{-- MASTER CRITERIA --}}
@@ -39,6 +39,13 @@
            class="block px-4 py-2 rounded
            {{ request()->routeIs('criteria.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
             Master Criteria
+        </a>
+
+        {{-- MANAGER ASSESSMENT SETTINGS --}}
+        <a href="{{ route('settings.manager-assessment') }}"
+           class="block px-4 py-2 rounded
+           {{ request()->routeIs('settings.manager-assessment') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+            Manager Assessment Settings
         </a>
 
         {{-- LOGOUT --}}

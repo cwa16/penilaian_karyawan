@@ -7,9 +7,9 @@ class SummaryController extends Controller
 {
     public function index($periodId)
     {
-        $period = DB::table('performance_periods')
+       $period = DB::table('performance_periods')
             ->where('id', $periodId)
-            ->first();
+            ->firstOrFail();
 
         $assessments = DB::table('performance_assessments as pa')
             ->join('users as u', 'u.nik', '=', 'pa.user_nik')
