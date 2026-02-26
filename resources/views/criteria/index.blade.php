@@ -41,10 +41,17 @@
         </div>
 
         {{-- FLASH MESSAGE --}}
-        @if(session('success'))
-            <div class="mb-3 text-green-600 text-sm font-medium">
+        @if (session('success'))
+            <div id="success-msg" class="mb-4 px-4 py-3 rounded-md bg-green-100 text-green-800">
                 {{ session('success') }}
             </div>
+
+            <script>
+                setTimeout(function() {
+                    const msg = document.getElementById('success-msg');
+                    if(msg) msg.style.display = 'none';
+                }, 5000);
+            </script>
         @endif
 
         <div class="overflow-x-auto">

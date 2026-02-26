@@ -9,6 +9,7 @@ class PerformanceCriteria extends Model
     protected $table = 'performance_criteria';
 
     protected $fillable = [
+        'section',
         'code',
         'name',
         'description',

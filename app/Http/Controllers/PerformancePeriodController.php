@@ -36,7 +36,7 @@ class PerformancePeriodController extends Controller
         ]);
 
         return redirect()->route('admin.performance.periods.index')
-                         ->with('success', 'Periode berhasil ditambahkan');
+                        ->with('success', 'Periode berhasil ditambahkan');
     }
 
     public function destroy($id)
