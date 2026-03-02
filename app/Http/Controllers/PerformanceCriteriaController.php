@@ -25,7 +25,7 @@ class PerformanceCriteriaController extends Controller
             ->orderByRaw('CAST(SUBSTRING(code, 2) AS UNSIGNED)')
             ->get();
 
-        $pdf = Pdf::loadView('criteria.export_pdf', compact('criteria'))
+        $pdf = Pdf::loadView('criteria.export', compact('criteria'))
             ->setPaper('a4', 'landscape');
 
         return $pdf->download('master-criteria.pdf');

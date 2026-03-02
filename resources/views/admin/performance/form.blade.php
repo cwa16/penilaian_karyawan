@@ -101,15 +101,15 @@
                     {{-- Keterangan Nilai --}}
                     <div class="mb-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs shadow">
                         <div class="flex flex-wrap gap-x-3 gap-y-1">
-                            <span>Kurang  <strong>I</strong></span>
+                            <span>Kurang  <strong>1</strong></span>
                             <span>  </span>
-                            <span>Cukup  <strong>II</strong></span>
+                            <span>Cukup  <strong>2</strong></span>
                             <span>  </span>
-                            <span>Baik  <strong>III</strong></span>
+                            <span>Baik  <strong>3</strong></span>
                             <span>  </span>
-                            <span>Sangat Baik  <strong>IV</strong></span>
+                            <span>Sangat Baik  <strong>4</strong></span>
                             <span>  </span>
-                            <span>Istimewa  <strong>V</strong></span>
+                            <span>Istimewa  <strong>5</strong></span>
                         </div>
                     </div>
 
@@ -120,6 +120,7 @@
                                     <th class="px-3 py-2 w-12 text-left">No</th>
                                     <th class="px-3 py-2 text-left">Name</th>
                                     <th class="px-3 py-2 text-left">Description</th>
+                                    <th class="px-3 py-2 text-left">Bobot</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 1</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 2</th>
                                     <th class="px-3 py-2 text-center w-20">Skor</th>
@@ -142,6 +143,9 @@
                                         <td class="px-3 py-2 text-center text-gray-600">{{ $i + 1 }}</td>
                                         <td class="px-3 py-2 font-medium text-gray-800">{{ $c->name }}</td>
                                         <td class="px-3 py-2 text-gray-500">{{ $c->description }}</td>
+                                        <td class="px-3 py-2 text-center font-semibold text-gray-700">
+                                            {{ number_format($c->weight, 0) }}%
+                                        </td>
                                         <td class="px-3 py-2">
                                             <input type="number" min="1" max="5"
                                                 name="scores[{{ $c->id }}][1]" value="{{ $nilai1 }}"

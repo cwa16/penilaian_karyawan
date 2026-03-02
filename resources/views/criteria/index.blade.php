@@ -24,7 +24,7 @@
                 Master Criteria Penilaian
             </h2>
 
-            <a href="{{ route('criteria.export.pdf') }}"
+            <a href="{{ route('criteria.export') }}"
                 target="_blank"
                 class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 shadow">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,6 +65,7 @@
                     <th rowspan="3" class="p-1 border w-28 text-center">Aspek Penilaian PA</th>
                     <th rowspan="3" class="p-1 border w-28 text-center">Definisi</th>
                     <th colspan="5" class="p-1 border">Kategori Penilaian</th>
+                    <th rowspan="3" class="p-1 border w-10">Bobot</th>
                     <th rowspan="3" class="p-1 border w-10">Aksi</th>
                 </tr>
 
@@ -97,7 +98,6 @@
                     @if($currentSection !== $c->section)
 
                         @php
-                            // WARNA SECTION SESUAI HRD
                             $sectionColor = match(strtolower($c->section)) {
                                 'hasil kerja' => 'bg-blue-200',
                                 'sikap kerja' => 'bg-yellow-200',
@@ -151,6 +151,10 @@
                             {{ optional($c->scales->where('score', 5)->first())->description ?? '-' }}
                         </td>
                         
+                        <td class="p-2 border text-center font-semibold text-gray-700">
+                            {{ number_format($c->weight, 0) }}%
+                        </td>
+
                         <td class="p-2 border text-center">
                             <div class="flex justify-center gap-1">
                                 <a href="{{ route('criteria.edit', $c->id) }}"
