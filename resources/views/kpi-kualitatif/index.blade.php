@@ -1,4 +1,5 @@
 <x-app-layout>
+    <div x-data="{ openImport:false }">
     <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/logobskp2.png') }}" 
@@ -18,11 +19,22 @@
 
     <div class="max-w-7xl mx-auto">
         <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">
+                    KPI Kualitatif - {{ $period->year }}
+                </h2>
 
-            <h2 class="text-xl font-semibold mb-4">
-                KPI Kualitatif
-            </h2>
+                <a href="{{ route('kpi-kualitatif.periods') }}"
+                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-md text-sm border text-gray-700 hover:bg-gray-200 shadow">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Kembali
+                </a>
+            </div>
 
+            
             {{-- IMPORT FORM --}}
             <form action="{{ route('kpi-kualitatif.import') }}" 
                 method="POST" 
@@ -47,45 +59,39 @@
 
             {{-- TABLE --}}
             <div class="overflow-x-auto">
-                <table class="min-w-full border border-gray-300 text-sm">
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th class="border px-3 py-2">No</th>
-                            <th class="border px-3 py-2">Tahun</th>
-                            <th class="border px-3 py-2">NIK</th>
-                            <th class="border px-3 py-2">Nama</th>
-                            <th class="border px-3 py-2">Kategori KPI</th>
-                            <th class="border px-3 py-2">Nilai</th>
-                            <th class="border px-3 py-2">Aksi</th>
+
+            <table class="min-w-full border border-gray-300 text-sm">
+                <thead class="bg-gray-100 text-gray-700">
+                    <tr>
+                        @if($kualitatifs->isNotEmpty())
+                            @foreach(array_keys($kualitatifs->first()->getAttributes()) as $column)
+                                <th class="border px-3 py-2">{{ Str::title(str_replace('_', ' ', $column)) }}</th>
+                            @endforeach
+                        @endif
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse($kualitatifs as $item)
+                        <tr class="hover:bg-gray-50">
+                            @foreach($item->getAttributes() as $value)
+                                <td class="border px-3 py-2 text-center">{{ $value }}</td>
+                            @endforeach
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($kualitatifs as $index => $item)
-                            <tr>
-                                <td class="border px-3 py-2">{{ $index + 1 }}</td>
-                                <td class="border px-3 py-2">{{ $item->tahun }}</td>
-                                <td class="border px-3 py-2">{{ $item->nik }}</td>
-                                <td class="border px-3 py-2">{{ $item->nama }}</td>
-                                <td class="border px-3 py-2">{{ $item->kategori }}</td>
-                                <td class="border px-3 py-2">{{ $item->nilai }}</td>
-                                <td class="border px-3 py-2 text-center">
-                                    <a href="{{ route('kpi-kualitatif.show', $item->id) }}"
-                                        class="bg-blue-500 text-white px-3 py-1 text-xs rounded hover:bg-blue-600">
-                                        Detail
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center py-4 text-gray-500">
-                                    Belum ada data KPI Kualitatif.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                    @empty
+                        <tr>
+                            <td colspan="{{ $kualitatifs->first() ? count($kualitatifs->first()->getAttributes()) : 1 }}" class="text-center py-4 text-gray-500">
+                                Belum ada data KPI
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            </table>
             </div>
 
         </div>
+    </div>
     </div>
 </x-app-layout>

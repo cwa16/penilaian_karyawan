@@ -22,7 +22,10 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\KpiKualitatifController;
 
 #KPI_Kualitatif
-Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'index'])
+Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'periods'])
+    ->name('kpi-kualitatif.periods');
+
+Route::get('/kpi-kualitatif/{period}', [KpiKualitatifController::class, 'index'])
     ->name('kpi-kualitatif.index');
 
 Route::post('/kpi-kualitatif/import', [KpiKualitatifController::class, 'import'])

@@ -65,7 +65,7 @@
                     <th rowspan="3" class="p-1 border w-28 text-center">Aspek Penilaian PA</th>
                     <th rowspan="3" class="p-1 border w-28 text-center">Definisi</th>
                     <th colspan="5" class="p-1 border">Kategori Penilaian</th>
-                    <th rowspan="3" class="p-1 border w-10">Bobot</th>
+                    <th rowspan="3" class="p-1 border w-10 hidden">Bobot</th>
                     <th rowspan="3" class="p-1 border w-10">Aksi</th>
                 </tr>
 
@@ -151,7 +151,7 @@
                             {{ optional($c->scales->where('score', 5)->first())->description ?? '-' }}
                         </td>
                         
-                        <td class="p-2 border text-center font-semibold text-gray-700">
+                        <td class="p-2 border text-center font-semibold text-gray-700 hidden">
                             {{ number_format($c->weight, 0) }}%
                         </td>
 
