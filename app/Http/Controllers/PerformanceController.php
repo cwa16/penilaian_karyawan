@@ -120,7 +120,7 @@ class PerformanceController extends Controller
                     $evaluatorOrder = 2;
                     break;
 
-                case 'Div 1':
+                case 'Div 2':
                     $employees = User::whereIn('dept', ['II/D', 'II/E', 'II/F'])
                         ->orderBy('name')
                         ->get();
@@ -142,6 +142,16 @@ class PerformanceController extends Controller
                 ->get();
 
             $evaluatorOrder = 1;
+        }
+
+        $q = request('q');
+
+        if ($q) {
+            $employees = $employees->filter(function ($emp) use ($q) {
+                return str_contains(strtolower($emp->name), strtolower($q)) ||
+                    str_contains(strtolower($emp->nik), strtolower($q)) ||
+                    str_contains(strtolower($emp->jabatan), strtolower($q));
+            });
         }
 
         $rows = $employees->map(function ($emp) use ($periodId) {

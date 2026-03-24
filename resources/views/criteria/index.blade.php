@@ -80,11 +80,11 @@
 
                 {{-- BARIS 3 --}}
                 <tr>
-                    <th class="p-1 border font-medium">I</th>
-                    <th class="p-1 border font-medium">II</th>
-                    <th class="p-1 border font-medium">III</th>
-                    <th class="p-1 border font-medium">IV</th>
-                    <th class="p-1 border font-medium">V</th>
+                    <th class="p-1 border font-medium">1</th>
+                    <th class="p-1 border font-medium">2</th>
+                    <th class="p-1 border font-medium">3</th>
+                    <th class="p-1 border font-medium">4</th>
+                    <th class="p-1 border font-medium">5</th>
                 </tr>
             </thead>
 

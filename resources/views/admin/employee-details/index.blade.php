@@ -15,10 +15,6 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-bold">Dashboard</h1>
-        <p class="text-gray-600 text-sm">Welcome, {{ auth()->user()->name }}</p>
-    </div>
 
     <!-- FILTER -->
     <div class="bg-white p-3 rounded-lg shadow mb-4 flex gap-3">
@@ -63,7 +59,7 @@
 
     <!-- TABLE -->
     <div class="bg-white rounded-lg shadow p-4">
-        <h2 class="text-lg font-semibold mb-3">Data Karyawan</h2>
+        <h2 class="text-lg font-semibold mb-3">Daftar Karyawan</h2>
 
         <div class="overflow-x-auto">
             <table class="min-w-full border-collapse text-sm">
@@ -75,7 +71,7 @@
                         <th class="px-2 py-1 border">Dept</th>
                         <th class="px-2 py-1 border">Jabatan</th>
                         <th class="px-2 py-1 border">Pendidikan</th>
-                        <!-- <th class="px-2 py-1 border text-center">Penilai</th> -->
+                        <th class="px-2 py-1 border text-center">Aksi</th>
                     </tr>
                 </thead>
 
@@ -88,14 +84,12 @@
                             <td class="px-2 py-0.5 border">{{ $emp->dept }}</td>
                             <td class="px-2 py-0.5 border">{{ $emp->jabatan }}</td>
                             <td class="px-2 py-0.5 border">{{ $emp->pendidikan }}</td>
-                            <!-- <td class="px-2 py-0.5 border text-center">
-                                <button
-                                    onclick="alert('Fitur penilaian akan segera tersedia')"
-                                    class="bg-blue-600 text-white px-2 py-0.5 rounded text-xs hover:bg-blue-700"
-                                >
-                                    Nilai
-                                </button>
-                            </td> -->
+                            <td class="px-2 py-0.5 border text-center">
+                                <a href="{{ route('employee-details.detail', $emp->id) }}"
+                                class="bg-blue-600 text-white px-2 py-0.5 rounded text-xs hover:bg-blue-700">
+                                    Detail
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <tr>

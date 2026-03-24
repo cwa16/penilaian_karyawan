@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('criteria_id')
-                  ->references('id')
-                  ->on('performance_criteria')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('performance_criteria')
+                ->onDelete('cascade');
         });
     }
 

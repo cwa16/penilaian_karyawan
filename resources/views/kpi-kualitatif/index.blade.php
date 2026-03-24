@@ -36,7 +36,7 @@
 
             
             {{-- IMPORT FORM --}}
-            <form action="{{ route('kpi-kualitatif.import') }}" 
+            <form action="{{ route('kpi-kualitatif.import', ['period' => $period->id]) }}" 
                 method="POST" 
                 enctype="multipart/form-data" 
                 class="flex items-center gap-3 mb-6">
@@ -57,40 +57,128 @@
                 </div>
             @endif
 
+            @php
+            function excelPercent($value, $isPercentColumn = true) {
+                if ($value === null) return '-';
+                
+                if ($isPercentColumn) {
+                    // Konversi desimal Excel ke persen dan tampilkan 1 desimal
+                    return number_format($value * 100, 1) . '%';
+                }
+                
+                return $value; // Untuk kolom non-persen
+            }
+            @endphp
+
             {{-- TABLE --}}
             <div class="overflow-x-auto">
 
-            <table class="min-w-full border border-gray-300 text-sm">
-                <thead class="bg-gray-100 text-gray-700">
+            <table class="min-w-full border border-gray-300 text-xs">
+                <thead class="bg-blue-600 text-white text-xs text-center">
+
                     <tr>
-                        @if($kualitatifs->isNotEmpty())
-                            @foreach(array_keys($kualitatifs->first()->getAttributes()) as $column)
-                                <th class="border px-3 py-2">{{ Str::title(str_replace('_', ' ', $column)) }}</th>
-                            @endforeach
-                        @endif
+
+                    <th rowspan="2" class="border px-2 py-2">No</th>
+                    <th rowspan="2" class="border px-2 py-2">NIK</th>
+                    <th rowspan="2" class="border px-2 py-2">Nama</th>
+                    <th rowspan="2" class="border px-2 py-2">Status</th>
+                    <th rowspan="2" class="border px-2 py-2">Dept</th>
+                    <th rowspan="2" class="border px-2 py-2">Posisi</th>
+
+                    <th colspan="2" class="border px-2 py-2 whitespace-nowrap">KPI Dept (30%)</th>
+                    <th colspan="2" class="border px-2 py-2 whitespace-nowrap">KPI Individu (70%)</th>
+
+                    <th rowspan="2" class="border px-2 py-2">Total</th>
+
+                    <th rowspan="2" class="border px-2 py-2">Assesment dari KPI (60%)</th>
+
+                    <th colspan="2" class="border px-2 py-2 whitespace-nowrap">Assesment Atasan (40%)</th>
+
+                    <th rowspan="2" class="border px-2 py-2">Total Assesment (100%)</th>
+
+                    <th colspan="9" class="border px-2 py-2">Pengurang Score</th>
+                    <th rowspan="2" class="border px-2 py-2">Pengurang Skor</th>
+
+                    <th rowspan="2" class="border px-2 py-2">Assesment Final</th>
+                    <th rowspan="2" class="border px-2 py-2">Grade</th>
+
                     </tr>
+
+
+                    <tr>
+
+                    <th class="border px-2 py-2 whitespace-nowrap">Full Year</th>
+                    <th class="border px-2 py-2">Result</th>
+
+                    <th class="border px-2 py-2 whitespace-nowrap">Full Year</th>
+                    <th class="border px-2 py-2">Result</th>
+
+                    <th class="border px-2 py-2">Assesment</th>
+                    <th class="border px-2 py-2">Result</th>
+
+                    <th class="border px-2 py-2">% Kehadiran</th>
+                    <th class="border px-2 py-2">Pengurang Skor</th>
+
+                    <th class="border px-2 py-2">% Late</th>
+                    <th class="border px-2 py-2">Pengurang Skor</th>
+
+                    <th class="border px-2 py-2">ST</th>
+                    <th class="border px-2 py-2">SP1</th>
+                    <th class="border px-2 py-2">SP2</th>
+                    <th class="border px-2 py-2">SP3</th>
+
+                    <th class="border px-2 py-2">Pengurang Skor</th>
+
+                    </tr>
+
                 </thead>
 
                 <tbody>
-                    @forelse($kualitatifs as $item)
-                        <tr class="hover:bg-gray-50">
-                            @foreach($item->getAttributes() as $value)
-                                <td class="border px-3 py-2 text-center">{{ $value }}</td>
-                            @endforeach
+                    @foreach($kualitatifs as $index => $data)
+                        <tr class="text-[px-7] text-center">
+
+                        <td class="border px-1 py-1.5">{{ $index+1 }}</td>
+                        <td class="border px-1 py-1.5 whitespace-nowrap">{{ $data->nik }}</td>
+                        <td class="border px-1 py-1.5 whitespace-nowrap text-left">{{ $data->nama }}</td>
+                        <td class="border px-1 py-1.5 whitespace-nowrap text-left">{{ $data->status }}</td>
+                        <td class="border px-1 py-1.5 whitespace-nowrap text-left">{{ $data->dept }}</td>
+                        <td class="border px-1 py-1.5 whitespace-nowrap text-left">{{ $data->posisi }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->kpi_dept_full_year }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->kpi_dept_result }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->kpi_individu_full_year }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->kpi_individu_result }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->total_kpi }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->assessment_kpi }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->assessment_kpi_result }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->assessment_atasan }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->assessment_atasan_result }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->total_assessment }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->kehadiran }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->pengurang_kehadiran }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->late }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->pengurang_late }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->st ?? '-' }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->sp1 ?? '-' }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->sp2 ?? '-' }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->sp3 ?? '-' }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->pengurang_score }}</td>
+
+                        <td class="border px-1 py-1.5">{{ $data->assessment_final }}</td>
+                        <td class="border px-1 py-1.5">{{ $data->grade }}</td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="{{ $kualitatifs->first() ? count($kualitatifs->first()->getAttributes()) : 1 }}" class="text-center py-4 text-gray-500">
-                                Belum ada data KPI
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
-
-            </table>
-            </div>
-
         </div>
     </div>
     </div>

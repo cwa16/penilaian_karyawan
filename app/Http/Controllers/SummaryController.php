@@ -6,6 +6,7 @@ use App\Exports\PerformanceSummaryExcelExport;
 use Maatwebsite\Excel\Excel;
 use App\Models\Criteria;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class SummaryController extends Controller
 {
@@ -84,6 +85,8 @@ class SummaryController extends Controller
     }
     public function index($periodId)
     {    
+        $login = Auth::user();
+
         $period = DB::table('performance_periods')
             ->where('id', $periodId)
             ->first();
@@ -93,6 +96,9 @@ class SummaryController extends Controller
         $assessments = DB::table('performance_assessments as pa')
             ->join('users as u', 'u.nik', '=', 'pa.user_nik')
             ->where('pa.period_id', $period->id)
+            ->when($login->status != 'Manager', function ($q) use ($login) {
+                $q->where('u.dept_code', $login->dept_code);
+            })
             ->when($deptFilter, function($q) use ($deptFilter) {
                 $q->where('u.dept', $deptFilter);
             })    

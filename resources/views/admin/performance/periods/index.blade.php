@@ -22,9 +22,8 @@
             <div
                 class="px-6 py-5 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <div>
-                    <h2 class="text-2xl font-semibold text-gray-800">Pilih Periode Penilaian</h2>
-                    <p class="text-sm text-gray-500 mt-1">Pilih periode untuk melihat daftar karyawan dan ringkasan
-                        penilaian.</p>
+                    <h2 class="text-2xl font-semibold text-gray-800">Select Assessment Period</h2>
+                    <p class="text-sm text-gray-500 mt-1">Select a period to view the employee list and appraisal summary.</p>
                 </div>
 
                 <button 
@@ -34,7 +33,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                    Buat Periode
+                    Add Period
                 </button>
             </div>
 
@@ -126,19 +125,14 @@
                                                 </a>
                                                 <form action="{{ route('admin.performance.periods.destroy', $p->id) }}"
                                                     method="POST"
-                                                    onsubmit="return confirm('Yakin mau hapus periode ini?')"
+                                                    class="delete-period-form"
                                                     style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="p-2 rounded-md bg-red-500 hover:bg-red-600 transition shadow">
 
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 24 24"
-                                                            class="w-5 h-5 text-white"
-                                                            fill="currentColor">
-                                                            <path d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v8h-2V9zm4 0h2v8h-2V9zM7 9h2v8H7V9z"/>
-                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
 
                                                     </button>
                                                 </form>
@@ -188,4 +182,69 @@
                 </div>
             </div>
         </div>
+        <div id="deleteModal"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden z-50">
+
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center w-80">
+
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        Hapus Periode
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mb-5">
+                        Apakah Anda yakin ingin menghapus periode ini?
+                    </p>
+
+                    <div class="flex justify-center gap-3">
+
+                        <button onclick="closeDeleteModal()"
+                        class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800">
+                            Batal
+                        </button>
+
+                        <button onclick="confirmDelete()"
+                        class="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white">
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
 </x-app-layout>
+<script>
+
+let deleteForm = null;
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    document.querySelectorAll('.delete-period-form').forEach(function(form){
+
+        form.addEventListener('submit', function(e){
+
+            e.preventDefault();
+
+            deleteForm = form;
+
+            document.getElementById('deleteModal').classList.remove('hidden');
+
+        });
+
+    });
+
+});
+
+function closeDeleteModal(){
+    document.getElementById('deleteModal').classList.add('hidden');
+}
+
+function confirmDelete(){
+
+    if(deleteForm){
+        deleteForm.submit();
+    }
+
+}
+
+</script>

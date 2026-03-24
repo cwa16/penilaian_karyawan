@@ -9,7 +9,7 @@
                 </h2>
 
                 <a href="{{ route('kpi.index') }}"
-                   class="bg-gray-500 text-white px-4 py-1 text-sm rounded hover:bg-gray-600">
+                    class="bg-gray-500 text-white px-4 py-1 text-sm rounded hover:bg-gray-600">
                     Kembali
                 </a>
             </div>

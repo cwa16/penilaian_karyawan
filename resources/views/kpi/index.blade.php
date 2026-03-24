@@ -20,7 +20,7 @@
         <div class="bg-white shadow-lg rounded-lg p-6">
 
             <h2 class="text-xl font-semibold mb-4">
-                Penilaian KPI
+                Key Performance Indicator
             </h2>
 
             {{-- IMPORT FORM --}}
