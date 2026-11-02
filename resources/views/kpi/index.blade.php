@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logobskp2.png') }}" 
-                alt="Company Logo" 
+            <img src="{{ asset('images/logobskp2.png') }}"
+                alt="Company Logo"
                 class="h-10 w-auto">
-            
+
             <div>
                 <h1 class="text-lg font-semibold text-gray-800 leading-tight">
                     PT. Bridgestone Kalimantan Plantation
@@ -20,7 +20,7 @@
         <div class="bg-white shadow-lg rounded-lg p-6">
 
             <h2 class="text-xl font-semibold mb-4">
-                KPI Asessment
+                Penilaian KPI
             </h2>
 
             {{-- IMPORT FORM --}}

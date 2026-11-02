@@ -15,40 +15,77 @@
             </div>
         </div>
     </div>
-<div class="max-w-7xl mx-auto">
 
-    <div class="bg-white shadow rounded-lg p-6 space-y-4">
-        <h1 class="text-2xl font-semibold text-gray-800 mb-4">
-            Export KPI Kualitatif
-        </h1>
-        <div class="-mx-6 border-b border-slate-100 mt-2 mb-6"></div>
-        {{-- Pilih Tahun --}}
-        <div>
-            <label class="block text-sm font-medium text-gray-700">
-                Tahun Penilaian
-            </label>
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white shadow-lg rounded-lg p-6">
 
-            <select class="mt-1 w-full border rounded-md px-3 py-2">
-                <option selected>2025</option>
-            </select>
+            <h2 class="text-xl font-semibold mb-4">
+                KPI Kualitatif
+            </h2>
+
+            {{-- IMPORT FORM --}}
+            <form action="{{ route('kpi-kualitatif.import') }}" 
+                method="POST" 
+                enctype="multipart/form-data" 
+                class="flex items-center gap-3 mb-6">
+                @csrf
+
+                <input type="file" name="file"
+                    class="border border-gray-300 px-3 py-1 text-sm shadow">
+
+                <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-1 text-sm rounded hover:bg-blue-700 shadow-md">
+                    IMPORT
+                </button>
+            </form>
+
+            @if(session('success'))
+                <div class="bg-green-100 text-green-700 px-4 py-2 mb-4 rounded text-sm">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            {{-- TABLE --}}
+            <div class="overflow-x-auto">
+                <table class="min-w-full border border-gray-300 text-sm">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="border px-3 py-2">No</th>
+                            <th class="border px-3 py-2">Tahun</th>
+                            <th class="border px-3 py-2">NIK</th>
+                            <th class="border px-3 py-2">Nama</th>
+                            <th class="border px-3 py-2">Kategori KPI</th>
+                            <th class="border px-3 py-2">Nilai</th>
+                            <th class="border px-3 py-2">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($kualitatifs as $index => $item)
+                            <tr>
+                                <td class="border px-3 py-2">{{ $index + 1 }}</td>
+                                <td class="border px-3 py-2">{{ $item->tahun }}</td>
+                                <td class="border px-3 py-2">{{ $item->nik }}</td>
+                                <td class="border px-3 py-2">{{ $item->nama }}</td>
+                                <td class="border px-3 py-2">{{ $item->kategori }}</td>
+                                <td class="border px-3 py-2">{{ $item->nilai }}</td>
+                                <td class="border px-3 py-2 text-center">
+                                    <a href="{{ route('kpi-kualitatif.show', $item->id) }}"
+                                        class="bg-blue-500 text-white px-3 py-1 text-xs rounded hover:bg-blue-600">
+                                        Detail
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center py-4 text-gray-500">
+                                    Belum ada data KPI Kualitatif.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-
-        {{-- Tombol Export --}}
-        <div class="flex gap-3 pt-4">
-
-            <button
-                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow">
-                Export PDF
-            </button>
-
-            <button
-                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow">
-                Export Excel
-            </button>
-
-        </div>
-
     </div>
-</div>
-
 </x-app-layout>

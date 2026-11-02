@@ -24,8 +24,8 @@ use App\Http\Controllers\KpiKualitatifController;
 Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'index'])
     ->name('kpi-kualitatif.index');
 
-Route::get('/export/kpi-kualitatif', [ExportController::class, 'kpiKualitatif'])
-    ->name('export.kpi.kualitatif');
+Route::post('/kpi-kualitatif/import', [KpiKualitatifController::class, 'import'])
+    ->name('kpi-kualitatif.import');
 
 Route::get('/criteria/export/pdf',
     [PerformanceCriteriaController::class, 'exportPdf']
