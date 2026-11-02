@@ -59,12 +59,12 @@
                         <tr>
                             <th class="px-1 py-2 w-8 text-center">No</th>
                             <th class="px-1 py-2 w-24 text-left">NIK</th>
-                            <th class="px-2 py-2 text-left">Nama</th>
+                            <th class="px-2 py-2 w-60 text-left">Nama</th>
                             <th class="px-1 py-2 w-20 text-left">Dept</th>
                             <th class="px-1 py-2 w-24 text-left">Jabatan</th>
                             <th class="px-1 py-2 w-16 text-center">Pdk</th>
-                            <th class="px-1 py-2 w-28 text-center">Status</th>
-                            <th class="px-1 py-2 w-36 text-center">Aksi</th>
+                            <th class="px-1 py-2 w-24 text-center">Status</th>
+                            <th class="px-1 py-2 w-20 text-center">Aksi</th>
                         </tr>
                     </thead>
 
@@ -104,7 +104,7 @@
                                     @else
                                         <span class="px-2 py-0.5 text-xs rounded-full
                                             {{ $r['assessment']->status === 'approved' ? 'bg-green-100 text-green-700' :
-                                               ($r['assessment']->status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700') }}">
+                                            ($r['assessment']->status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700') }}">
                                             {{ strtoupper($r['assessment']->status) }}
                                         </span>
                                     @endif
@@ -118,7 +118,7 @@
                                             Isi penilaian
                                         </a>
                                         <a href="#"
-                                            class="px-2 py-1 bg-gray-100 border rounded text-xs hover:bg-gray-50">
+                                            class="px-2 py-1 bg-gray-100 border rounded text-xs hover:bg-gray-50 hidden">
                                             Detail
                                         </a>
                                     </div>

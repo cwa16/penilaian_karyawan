@@ -120,7 +120,7 @@
                                     <th class="px-3 py-2 w-12 text-left">No</th>
                                     <th class="px-3 py-2 text-left">Name</th>
                                     <th class="px-3 py-2 text-left">Description</th>
-                                    <th class="px-3 py-2 text-left">Bobot</th>
+                                    <th class="px-3 py-2 text-left hidden">Bobot</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 1</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 2</th>
                                     <th class="px-3 py-2 text-center w-20">Skor</th>
@@ -143,7 +143,7 @@
                                         <td class="px-3 py-2 text-center text-gray-600">{{ $i + 1 }}</td>
                                         <td class="px-3 py-2 font-medium text-gray-800">{{ $c->name }}</td>
                                         <td class="px-3 py-2 text-gray-500">{{ $c->description }}</td>
-                                        <td class="px-3 py-2 text-center font-semibold text-gray-700">
+                                        <td class="px-3 py-2 text-center font-semibold text-gray-700 hidden">
                                             {{ number_format($c->weight, 0) }}%
                                         </td>
                                         <td class="px-3 py-2">

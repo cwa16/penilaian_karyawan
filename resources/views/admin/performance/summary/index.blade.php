@@ -106,7 +106,7 @@
                                     <span
                                         class="uppercase tracking-wider text-xs">{{ $c->name }}</span>
                                     <span
-                                        class="mt-1 inline-flex items-center text-[11px] font-medium">
+                                        class="mt-1 inline-flex items-center text-[11px] font-medium hidden">
                                         {{ number_format($c->weight, 0) }}%
                                     </span>
                                 </div>

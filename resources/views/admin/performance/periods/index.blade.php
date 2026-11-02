@@ -73,12 +73,16 @@
                                 <tr>
                                     <th class="px-4 py-3 text-left w-24">Tahun</th>
                                     <th class="px-4 py-3 text-left">Nama</th>
-                                    <th class="px-4 py-3 text-left w-56">Rentang</th>
+                                    <th class="px-4 py-3 text-center w-56">Rentang</th>
+                                    <th class="px-4 py-3 text-center w-48">Status</th>
                                     <th class="px-4 py-3 text-center w-48">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-100">
+                                @php
+                                $currentYear = now()->year;
+                                @endphp
                                 @foreach ($periods as $p)
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-4 py-3 text-gray-700 font-medium text-center">{{ $p->year }}
@@ -88,6 +92,15 @@
                                             <time datetime="{{ $p->start_date }}">{{ $p->start_date }}</time>
                                             <span class="mx-2 text-gray-300">—</span>
                                             <time datetime="{{ $p->end_date }}">{{ $p->end_date }}</time>
+                                        </td>
+                                        <td class="px-4 py-3 text-center">
+                                            @if($p->year > $currentYear)
+                                            <span class="px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded">Belum Dimulai</span>
+                                            @elseif($p->year == $currentYear)
+                                            <span class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">Penilaian Sedang Berlangsung</span>
+                                            @else
+                                            <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded">Tidak Ada Data KPI Kualitatif</span>
+                                            @endif
                                         </td>
                                         <td class="px-4 py-3 text-center">
                                             <div class="inline-flex items-center gap-2">
