@@ -6,46 +6,46 @@ use Illuminate\Database\Eloquent\Model;
 
 class KpiKualitatif extends Model
 {
-    protected $table = 'kpi_kualitatifs';
-
     protected $fillable = [
-        'no',
-        'tahun',
-        'nik',
-        'nama',
-        'status',
-        'dept',
-        'jabatan',
-        'posisi',
+    'period_id',
 
-        'kpi_dept_full_year',
-        'kpi_dept_result',
+    'nik',
+    'nama',
+    'status',
+    'dept',
+    'posisi',
 
-        'kpi_individu_full_year',
-        'kpi_individu_result',
+    'kpi_dept_full_year',
+    'kpi_dept_result',
 
-        'total',
-        'assessment_kpi_60',
+    'kpi_individu_full_year',
+    'kpi_individu_result',
 
-        'assessment_atasan_40',
-        'assessment_atasan_result',
+    'total_kpi',
 
-        'total_assessment',
+    'assessment_kpi',
+    'assessment_kpi_result',
 
-        'percent_kehadiran',
-        'pengurang_kehadiran',
+    'assessment_atasan',
+    'assessment_atasan_result',
 
-        'percent_late',
-        'pengurang_late',
+    'total_assessment',
 
-        'st',
-        'sp1',
-        'sp2',
-        'sp3',
+    'kehadiran',
+    'pengurang_kehadiran',
 
-        'pengurang_sp',
+    'late',
+    'pengurang_late',
 
-        'assessment_final',
-        'grade'
-    ];
+    'st',
+    'sp1',
+    'sp2',
+    'sp3',
+
+    'pengurang_score',
+
+    'assessment_final',
+    'grade'
+    ];   
 }
+

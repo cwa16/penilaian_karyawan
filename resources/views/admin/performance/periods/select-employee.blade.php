@@ -40,17 +40,25 @@
             </div>
 
             {{-- Search --}}
-            <div class="px-6 py-3 border-b border-gray-50 flex justify-between">
+            <form method="GET" class="px-6 py-3 border-b border-gray-50 flex justify-between">
+
                 <div class="relative w-full max-w-sm">
-                    <input type="search" placeholder="Cari nama / NIK / jabatan"
-                        class="w-full pl-9 pr-3 py-1.5 border rounded-md text-sm focus:ring-2 focus:ring-indigo-200" />
+
+                    <input type="search"
+                        name="q"
+                        value="{{ request('q') }}"
+                        placeholder="Cari nama / NIK / jabatan"
+                        class="w-full pl-9 pr-3 py-1.5 border rounded-md text-sm" />
+
                     <svg class="w-4 h-4 absolute left-3 top-2.5 text-gray-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
                     </svg>
+
                 </div>
-            </div>
+
+            </form>
 
             {{-- Table --}}
             <div class="overflow-x-auto">

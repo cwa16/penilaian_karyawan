@@ -19,6 +19,13 @@ use App\Http\Controllers\KpiController;
 use App\Http\Controllers\AssessmentMonitoringController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\KpiKualitatifController;
+use App\Http\Controllers\EmployeeDetailsController;
+
+#Employee-details
+Route::prefix('admin/employee-details')->group(function() {
+    Route::get('/', [EmployeeDetailsController::class, 'index'])->name('employee-details.index');
+    Route::get('/{id}', [EmployeeDetailsController::class, 'detail'])->name('employee-details.detail');
+});
 
 #KPI_Kualitatif
 Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'periods'])
@@ -27,7 +34,7 @@ Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'periods'])
 Route::get('/kpi-kualitatif/{period}', [KpiKualitatifController::class, 'index'])
     ->name('kpi-kualitatif.index');
 
-Route::post('/kpi-kualitatif/import', [KpiKualitatifController::class, 'import'])
+Route::post('/kpi-kualitatif/import/{period}', [KpiKualitatifController::class, 'import'])
     ->name('kpi-kualitatif.import');
 
 Route::get('/criteria/export/pdf',

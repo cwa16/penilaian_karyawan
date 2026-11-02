@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User; // pastikan model Employee
 
 class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $login = Auth::user();
+
         // Ambil filter dari request
         $status = $request->get('status');
         $dept = $request->get('dept');
@@ -17,6 +20,11 @@ class DashboardController extends Controller
 
         // Query employee dengan kondisi optional
         $query = User::query();
+
+        // Batasi data jika bukan Manager
+        if ($login->status != 'Manager') {
+            $query->where('dept_code', $login->dept_code);
+        }
 
         if($status) $query->where('status', $status);
         if($dept) $query->where('dept', $dept);

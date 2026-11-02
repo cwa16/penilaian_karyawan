@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::table('performance_criteria', function (Blueprint $table) {
             $table->string('section', 100)
-                  ->nullable()
-                  ->after('name');
+                ->nullable()
+                ->after('name');
         });
     }
 

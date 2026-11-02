@@ -20,36 +20,39 @@ class KpiController extends Controller
     }
 
     public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|mimes:csv,txt'
-        ]);
+{
+    $request->validate([
+        'file' => 'required|mimes:csv,txt'
+    ]);
 
-        $file = $request->file('file');
-        $handle = fopen($file, 'r');
+    $file = $request->file('file');
+
+    if (($handle = fopen($file->getRealPath(), 'r')) !== FALSE) {
 
         $header = true;
 
         while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
+            // skip header
             if ($header) {
                 $header = false;
                 continue;
             }
 
             KpiScore::create([
-                'tahun' => $row[0],
-                'nik' => $row[1],
-                'nama' => $row[2],
-                'dept' => $row[3],
-                'jabatan' => $row[4],
-                'posisi' => $row[5],
-                'total_kpi' => $row[6],
+                'tahun' => $row[0] ?? null,
+                'nik' => $row[1] ?? null,
+                'nama' => $row[2] ?? null,
+                'dept' => $row[3] ?? null,
+                'jabatan' => $row[4] ?? null,
+                'posisi' => $row[5] ?? null,
+                'total_kpi' => $row[6] ?? null,
             ]);
         }
 
         fclose($handle);
-
-        return redirect()->route('kpi.index')->with('success', 'Data KPI berhasil diimport.');
     }
+
+    return back()->with('success', 'Data berhasil diimport');
+}
 }

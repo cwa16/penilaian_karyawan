@@ -75,7 +75,7 @@
                         <th class="px-2 py-1 border">Dept</th>
                         <th class="px-2 py-1 border">Jabatan</th>
                         <th class="px-2 py-1 border">Pendidikan</th>
-                        <th class="px-2 py-1 border text-center">Penilai</th>
+                        <!-- <th class="px-2 py-1 border text-center">Penilai</th> -->
                     </tr>
                 </thead>
 
@@ -88,14 +88,14 @@
                             <td class="px-2 py-0.5 border">{{ $emp->dept }}</td>
                             <td class="px-2 py-0.5 border">{{ $emp->jabatan }}</td>
                             <td class="px-2 py-0.5 border">{{ $emp->pendidikan }}</td>
-                            <td class="px-2 py-0.5 border text-center">
+                            <!-- <td class="px-2 py-0.5 border text-center">
                                 <button
                                     onclick="alert('Fitur penilaian akan segera tersedia')"
                                     class="bg-blue-600 text-white px-2 py-0.5 rounded text-xs hover:bg-blue-700"
                                 >
                                     Nilai
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                     @empty
                         <tr>
