@@ -11,82 +11,9 @@ class SummaryController extends Controller
 {
     public function exportPdfByNik($nik)
     {
-        $baseAssessment = DB::table('performance_assessments as pa')
-            ->join('users as u', 'u.nik', '=', 'pa.user_nik')
-            ->where('u.nik', $nik)
-            ->orderByDesc('pa.id')
-            ->first();
-
-        if (!$baseAssessment) {
-            abort(404);
-        }
-
-        $assessments = DB::table('performance_assessments as pa')
-            ->join('performance_periods as p', 'p.id', '=', 'pa.period_id')
-            ->where('pa.user_nik', $nik)
-            ->select(
-                'pa.id',
-                'p.year'
-            )
-            ->orderByDesc('p.year')
-            ->get();
-
-        $scores = DB::table('performance_scores')
-            ->whereIn('assessment_id', $assessments->pluck('id'))
-            ->get()
-            ->groupBy(['assessment_id', 'criteria_id']);
-
-        $criteria = DB::table('performance_criteria')
-            ->orderBy('id')
-            ->get();
-
-        $histories = [];
-
-        foreach ($assessments as $a) {
-            $total = 0;
-            foreach ($criteria as $c) {
-                $scoreCollection = $scores[$a->id][$c->id] ?? collect();
-
-                $nilai1 = optional(
-                    $scoreCollection->firstWhere('evaluator_order', 1)
-                )->score ?? 0;
-
-                $nilai2 = optional(
-                    $scoreCollection->firstWhere('evaluator_order', 2)
-                )->score ?? 0;
-
-                $values = collect([$nilai1, $nilai2])->filter(fn($v) => $v > 0);
-                $avg = $values->count() ? $values->avg() : 0;
-
-                $skor = ($avg * $c->weight) / 100;
-                $total += $skor;
-            }
-
-            $persenQualitatif = ($total / 5) * 100;
-            $hasilQualitatif  = ($persenQualitatif * 40) / 100;
-
-            $histories[] = [
-                'year'             => $a->year ?? null,
-                'dept'             => $baseAssessment->dept,
-                'position'         => $baseAssessment->jabatan,
-                'persen'           => round($persenQualitatif, 0),
-                'hasil_qualitatif' => round($hasilQualitatif, 0),
-            ];
-        }
-
-        $pdf = Pdf::loadView('admin.performance.summary.pdf', [
-            'employee'  => $baseAssessment,
-            'histories' => $histories
-        ])->setPaper('A4', 'landscape');
-        $nama = str_replace(' ', '_', $baseAssessment->name);
-
-        return $pdf->download('Detail_Penilaian_Karyawan_'.$nama.'.pdf');
-    }
-    public function index($periodId)
-    {    
-        $period = DB::table('performance_periods')
+       $period = DB::table('performance_periods')
             ->where('id', $periodId)
-            ->first();
+            ->firstOrFail();
 
         $deptFilter = request('dept');
 
@@ -95,7 +22,7 @@ class SummaryController extends Controller
             ->where('pa.period_id', $period->id)
             ->when($deptFilter, function($q) use ($deptFilter) {
                 $q->where('u.dept', $deptFilter);
-            })    
+            })
             ->select(
                 'pa.id as assessment_id',
                 'u.nik',
@@ -155,7 +82,7 @@ class SummaryController extends Controller
                 'assessment_id' => $a->assessment_id,
                 'nik'   => $a->nik,
                 'name'  => $a->name,
-                'dept'  => $a->dept, 
+                'dept'  => $a->dept,
                 'rows'  => $rows,
                 'total' => round($total, 2),
             ];
@@ -234,7 +161,7 @@ class SummaryController extends Controller
             $summary->push([
                 'nik'   => $a->nik,
                 'name'  => $a->name,
-                'dept'  => $a->dept, 
+                'dept'  => $a->dept,
                 'rows'  => $rows,
                 'total' => round($total, 2),
             ]);

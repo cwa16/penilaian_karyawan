@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="max-w-7xl mx-auto">
+<div class="max-w-6xl mx-auto p-6">
     <div class="bg-white shadow-lg rounded-xl p-6">
 
         <h2 class="text-2xl font-semibold text-gray-800 mb-6">
@@ -12,14 +12,13 @@
 
             {{-- ROW 1 : SECTION | KODE | NAMA --}}
             <div class="grid grid-cols-3 gap-4">
-                <input type="hidden" name="weight" value="{{ $criteria->weight }}">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 mb-1">
                         Section
                     </label>
                     <input type="text" name="section"
                         value="{{ old('section', $criteria->section) }}"
-                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200 shadow"
+                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200"
                         required>
                 </div>
 
@@ -29,7 +28,7 @@
                     </label>
                     <input type="text" name="code"
                         value="{{ old('code', $criteria->code) }}"
-                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200 shadow"
+                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200"
                         required>
                 </div>
 
@@ -39,7 +38,7 @@
                     </label>
                     <input type="text" name="name"
                         value="{{ old('name', $criteria->name) }}"
-                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200 shadow"
+                        class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200"
                         required>
                 </div>
             </div>
@@ -51,7 +50,7 @@
                 </label>
                 <textarea name="description"
                     rows="3"
-                    class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200 shadow">{{ old('description', $criteria->description) }}</textarea>
+                    class="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200">{{ old('description', $criteria->description) }}</textarea>
             </div>
 
             {{-- KATEGORI PENILAIAN (HORIZONTAL) --}}
@@ -68,7 +67,7 @@
                             </label>
                             <textarea name="scales[{{ $i }}]"
                                 rows="4"
-                                class="w-full border rounded-lg p-2 text-xs focus:ring focus:ring-blue-200 shadow">{{ old("scales.$i", optional($criteria->scales->where('score', $i)->first())->description) }}</textarea>
+                                class="w-full border rounded-lg p-2 text-xs focus:ring focus:ring-blue-200">{{ old("scales.$i", optional($criteria->scales->where('score', $i)->first())->description) }}</textarea>
                         </div>
                     @endfor
                 </div>
@@ -77,7 +76,7 @@
             {{-- BUTTON --}}
             <div class="flex justify-end gap-3 pt-6 border-t">
                 <a href="{{ route('criteria.index') }}"
-                    class="px-4 py-2 border rounded-lg text-sm bg-gray-100 hover:bg-gray-200 shadow">
+                   class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-100">
                     Batal
                 </a>
 

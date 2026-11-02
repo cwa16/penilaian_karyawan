@@ -48,9 +48,9 @@
                 </div>
 
                 <div class="flex flex-col items-end gap-2">
-                    <a href="{{ url()->previous() }}"
-                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-md text-sm border text-gray-700 hover:bg-gray-200 shadow">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <a href="{{ route('performance.employees', $assessment->period_id) }}"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-md text-xs text-gray-700 hover:bg-gray-50">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 19l-7-7 7-7"></path>
                         </svg>
@@ -118,8 +118,9 @@
                             <thead class="bg-gray-900 text-white">
                                 <tr>
                                     <th class="px-3 py-2 w-12 text-left">No</th>
-                                    <th class="px-3 py-2 text-left">Name</th>
-                                    <th class="px-3 py-2 text-left">Description</th>
+                                    <th class="px-3 py-2 text-left">Kriteria</th>
+                                    <th class="px-3 py-2 text-left">Deskripsi</th>
+                                    <!-- <th class="px-3 py-2 text-center w-20">Bobot</th> -->
                                     <th class="px-3 py-2 text-center w-20">Nilai 1</th>
                                     <th class="px-3 py-2 text-center w-20">Nilai 2</th>
                                     <th class="px-3 py-2 text-center w-20">Skor</th>
@@ -142,6 +143,11 @@
                                         <td class="px-3 py-2 text-center text-gray-600">{{ $i + 1 }}</td>
                                         <td class="px-3 py-2 font-medium text-gray-800">{{ $c->name }}</td>
                                         <td class="px-3 py-2 text-gray-500">{{ $c->description }}</td>
+
+                                        <!-- <td class="px-3 py-2 text-center text-gray-700">
+                                            {{ number_format($c->weight, 0) }}%
+                                        </td> -->
+
                                         <td class="px-3 py-2">
                                             <input type="number" min="1" max="5"
                                                 name="scores[{{ $c->id }}][1]" value="{{ $nilai1 }}"

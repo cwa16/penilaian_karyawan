@@ -37,22 +37,23 @@
                     </h3>
 
                     <!-- SECTION (DI ATAS SENDIRI) -->
+                    <!-- SECTION (DI ATAS SENDIRI) -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium mb-1">Section</label>
                         <div class="flex gap-2">
+
                             <!-- DROPDOWN SECTION -->
                             <select name="section" id="section"
                                 class="border rounded-lg px-3 py-1 text-sm flex-none w-60 shadow-md">
+
                                 <option value="">-- Pilih Section --</option>
-                                <option value="hasil_kerja">Hasil Kerja</option>
-                                <option value="sikap_kerja">Sikap Kerja</option>
-                                <option value="disiplin">Disiplin</option>
-                                <option value="kerjasama">Kerjasama</option>
-                                <option value="kematangan">Kematangan / Kedewasaan</option>
-                                <option value="inisiatif">Inisiatif</option>
-                                <option value="kreativitas">Kreativitas</option>
-                                <option value="pengembangan_wawasan">Pengembangan Wawasan Pengetahuan</option>
-                                <option value="kemampuan_manajerial">Kemampuan Manajerial</option>
+
+                                @foreach($sections as $section)
+                                    <option value="{{ $section }}">
+                                        {{ ucwords(str_replace('_',' ', $section)) }}
+                                    </option>
+                                @endforeach
+
                             </select>
 
                             <!-- BUTTON TAMBAH SECTION -->
@@ -64,6 +65,40 @@
                         </div>
                     </div>
 
+                    <script>
+                    function addSection() {
+                        let newSection = prompt("Masukkan nama Section baru:");
+
+                        if(newSection) {
+
+                            // format jadi snake_case biar konsisten database
+                            let formattedValue = newSection
+                                .toLowerCase()
+                                .trim()
+                                .replace(/\s+/g,'_');
+
+                            const select = document.getElementById('section');
+
+                            // cek kalau sudah ada jangan ditambah lagi
+                            let exists = false;
+                            for (let i = 0; i < select.options.length; i++) {
+                                if (select.options[i].value === formattedValue) {
+                                    exists = true;
+                                    break;
+                                }
+                            }
+
+                            if (!exists) {
+                                const option = document.createElement('option');
+                                option.value = formattedValue;
+                                option.text = newSection;
+                                select.add(option);
+                            }
+
+                            select.value = formattedValue;
+                        }
+                    }
+                    </script>
                     <!-- KODE + ASPEK PENILAIAN PA (2 KOLOM, RATAS KIRI) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                         <div>
