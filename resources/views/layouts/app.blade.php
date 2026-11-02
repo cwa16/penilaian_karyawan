@@ -15,6 +15,14 @@
 
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
+    <style>
+        [x-cloak] { display: none !important; }
+        .backdrop-blur-fix {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
 
 <script>
@@ -27,6 +35,8 @@
         }
     });
 </script>
+
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
 <body class="font-sans antialiased">
@@ -47,12 +57,17 @@
             @include('layouts.sidebar')
 
             <!-- MAIN -->
-            <!-- 🔴 SATU-SATUNYA PERUBAHAN ADA DI SINI -->
+            <!--  SATU-SATUNYA PERUBAHAN ADA DI SINI -->
             <main class="flex-1 p-8 overflow-hidden transition-all duration-300">
                 {{ $slot }}
             </main>
         </div>
     </div>
 </body>
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
 
 </html>

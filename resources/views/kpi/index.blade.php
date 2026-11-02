@@ -1,4 +1,20 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto">
 
         <div class="bg-white shadow-lg rounded-lg p-6">
@@ -11,10 +27,10 @@
             <form action="{{ route('kpi.import') }}" method="POST" enctype="multipart/form-data" class="flex items-center gap-3 mb-6">
                 @csrf
                 <input type="file" name="file"
-                    class="border border-gray-300 px-3 py-1 text-sm">
+                    class="border border-gray-300 px-3 py-1 text-sm shadow">
 
                 <button type="submit"
-                    class="bg-blue-600 text-white px-4 py-1 text-sm rounded hover:bg-blue-700">
+                    class="bg-blue-600 text-white px-4 py-1 text-sm rounded hover:bg-blue-700 shadow-md">
                     IMPORT
                 </button>
             </form>
@@ -28,7 +44,7 @@
             {{-- TABLE --}}
             <div class="overflow-x-auto">
                 <table class="min-w-full border border-gray-300 text-sm">
-                    <thead class="bg-gray-100">
+                    <thead class="bg-gray-200">
                         <tr>
                             <th class="border px-3 py-2">No</th>
                             <th class="border px-3 py-2">Tahun</th>

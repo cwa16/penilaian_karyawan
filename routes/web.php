@@ -19,6 +19,15 @@ use App\Http\Controllers\KpiController;
 use App\Http\Controllers\PerformanceCriteriaController;
 use App\Http\Controllers\AssessmentMonitoringController;
 
+#PDF form criteria
+Route::get('/criteria/export/pdf',
+    [PerformanceCriteriaController::class, 'exportPdf']
+)->name('criteria.export.pdf');
+
+#PDF form detail summary
+Route::get('/summary/{nik}/export-pdf', [SummaryController::class, 'exportPdfByNik'])
+    ->name('summary.export.pdf');
+
 #monitoring
 Route::get('/assessment-monitoring', 
     [AssessmentMonitoringController::class, 'index']

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PerformanceCriteria;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PerformanceCriteriaController extends Controller
 {
@@ -15,6 +16,18 @@ class PerformanceCriteriaController extends Controller
         ->get();
 
         return view('criteria.index', compact('criteria'));
+    }
+
+    public function exportPdf()
+    {
+        $criteria = PerformanceCriteria::with('scales')
+            ->orderByRaw('CAST(SUBSTRING(code, 2) AS UNSIGNED)')
+            ->get();
+
+        $pdf = Pdf::loadView('criteria.export_pdf', compact('criteria'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('master-criteria.pdf');
     }
 
     public function create()

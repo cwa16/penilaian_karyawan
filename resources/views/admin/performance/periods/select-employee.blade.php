@@ -1,4 +1,20 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('images/logobskp2.png') }}" 
+                alt="Company Logo" 
+                class="h-10 w-auto">
+            
+            <div>
+                <h1 class="text-lg font-semibold text-gray-800 leading-tight">
+                    PT. Bridgestone Kalimantan Plantation
+                </h1>
+                <p class="text-sm text-gray-500">
+                    Performance Management System
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
 
@@ -14,7 +30,7 @@
                 </div>
 
                 <a href="{{ route('admin.performance.periods.index') }}"
-                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-sm border hover:bg-gray-50">
+                    class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 rounded-md text-sm border text-gray-700 hover:bg-gray-200 shadow">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 19l-7-7 7-7"></path>
@@ -39,7 +55,7 @@
             {{-- Table --}}
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm border-collapse">
-                    <thead class="bg-gray-900 text-white">
+                    <thead class="bg-gray-300">
                         <tr>
                             <th class="px-1 py-2 w-8 text-center">No</th>
                             <th class="px-1 py-2 w-24 text-left">NIK</th>
