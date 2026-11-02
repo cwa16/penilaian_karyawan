@@ -15,6 +15,22 @@ use App\Http\Controllers\ManagerAssessmentController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KpiController;
+use App\Http\Controllers\PerformanceCriteriaController;
+use App\Http\Controllers\AssessmentMonitoringController;
+
+#monitoring
+Route::get('/assessment-monitoring', 
+    [AssessmentMonitoringController::class, 'index']
+)->name('assessment.monitoring');
+
+#creteria
+Route::resource('criteria', PerformanceCriteriaController::class);
+
+#KPI
+Route::get('/kpi', [KpiController::class, 'index'])->name('kpi.index');
+Route::post('/kpi/import', [KpiController::class, 'import'])->name('kpi.import');
+Route::get('/kpi/{id}', [KpiController::class, 'show'])->name('kpi.show');
 
 Route::get('/upload', function () {return view('upload');});
 Route::post('/import-csv', [ImportController::class, 'import']);
@@ -42,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::prefix('admin/performance')->name('admin.performance.')->group(function () {
+    Route::resource('periods', PerformancePeriodController::class);
+});
 
 Route::get('/performance/input/{periodId}/{nik}', [PerformanceController::class, 'form'])->name('performance.input');
 Route::post('/performance/input/save', [PerformanceController::class, 'save']);
@@ -58,5 +77,14 @@ Route::post('/settings/manager-assessment', [ManagerAssessmentController::class,
 
 Route::get('/summary/{id}', [SummaryController::class, 'index'])->name('summary');
 
+Route::get('/summary/{id}/export-excel', [SummaryController::class, 'exportExcel'])
+    ->name('summary.export.excel');
+
+Route::get(
+    '/summary/{assessment}/detail',
+    [\App\Http\Controllers\SummaryController::class, 'detail']
+)->name('summary.detail');
+
+    
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';
