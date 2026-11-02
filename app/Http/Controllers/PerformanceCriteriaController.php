@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PerformanceCriteria;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class PerformanceCriteriaController extends Controller
 {
@@ -47,7 +48,7 @@ class PerformanceCriteriaController extends Controller
         PerformanceCriteria::create($request->all());
 
         return redirect()->route('criteria.index')
-            ->with('success', 'Kriteria berhasil ditambahkan');
+                        ->with('success', 'Kriteria berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -67,7 +68,30 @@ class PerformanceCriteriaController extends Controller
             'weight' => 'required|numeric|min:1|max:100'
         ]);
 
-        $criteria->update($request->all());
+        DB::transaction(function () use ($request, $criteria) {
+
+            // Update main criteria
+            $criteria->update([
+                'section'     => $request->section,
+                'code'        => $request->code,
+                'name'        => $request->name,
+                'description' => $request->description,
+                'weight'      => $request->weight,
+            ]);
+
+            // Update scales (I - V)
+            foreach ($request->scales as $score => $desc) {
+
+                $criteria->scales()->updateOrCreate(
+                    [
+                        'score' => $score
+                    ],
+                    [
+                        'description' => $desc
+                    ]
+                );
+            }
+        });    
 
         return redirect()->route('criteria.index')
             ->with('success', 'Kriteria berhasil diupdate');

@@ -49,7 +49,7 @@
                         setTimeout(function() {
                             const msg = document.getElementById('success-msg');
                             if(msg) msg.style.display = 'none';
-                        }, 4000);
+                        }, 5000);
                     </script>
                 @endif
                 @if ($periods->isEmpty())

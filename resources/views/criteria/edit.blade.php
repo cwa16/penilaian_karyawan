@@ -12,6 +12,7 @@
 
             {{-- ROW 1 : SECTION | KODE | NAMA --}}
             <div class="grid grid-cols-3 gap-4">
+                <input type="hidden" name="weight" value="{{ $criteria->weight }}">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 mb-1">
                         Section
@@ -76,7 +77,7 @@
             {{-- BUTTON --}}
             <div class="flex justify-end gap-3 pt-6 border-t">
                 <a href="{{ route('criteria.index') }}"
-                   class="px-4 py-2 border rounded-lg text-sm bg-gray-100 hover:bg-gray-200 shadow">
+                    class="px-4 py-2 border rounded-lg text-sm bg-gray-100 hover:bg-gray-200 shadow">
                     Batal
                 </a>
 
