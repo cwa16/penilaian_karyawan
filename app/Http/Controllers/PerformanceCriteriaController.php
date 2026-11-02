@@ -19,6 +19,8 @@ class PerformanceCriteriaController extends Controller
     return $pdf->download('master-criteria.pdf');
 }
 
+        $pdf = Pdf::loadView('criteria.export', compact('criteria'))
+            ->setPaper('a4', 'landscape');
 
  public function index()
         {

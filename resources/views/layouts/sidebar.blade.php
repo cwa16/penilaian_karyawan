@@ -18,11 +18,10 @@
            {{ request()->routeIs('kpi.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
             KPI Asessment
         </a>
-
-        {{-- MONITORING --}}
-        <a href="{{ route('assessment.monitoring') }}"
-           class="block px-4 py-2 rounded
-           {{ request()->routeIs('assessment.monitoring.*') ? 'bg-red-600' : 'hover:bg-gray-700' }}">
+        <a href="{{ route('kpi-kualitatif.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('kpi-kualitatif.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
+            KPI Kualitatif
+        </a>
+        <a href="{{ route('assessment.monitoring') }}" class="block px-4 py-2 rounded {{ request()->routeIs('assessment.monitoring') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">
             Monitoring
         </a>
         <a href="{{ route('criteria.index') }}" class="block px-4 py-2 rounded {{ request()->routeIs('criteria.*') ? 'bg-red-600 text-white' : 'hover:bg-gray-700' }}">

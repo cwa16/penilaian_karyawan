@@ -17,6 +17,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KpiController;
 use App\Http\Controllers\AssessmentMonitoringController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\KpiKualitatifController;
+
+#KPI_Kualitatif
+Route::get('/kpi-kualitatif', [KpiKualitatifController::class, 'index'])
+    ->name('kpi-kualitatif.index');
+
+Route::get('/export/kpi-kualitatif', [ExportController::class, 'kpiKualitatif'])
+    ->name('export.kpi.kualitatif');
 
 Route::get('/criteria/export/pdf',
     [PerformanceCriteriaController::class, 'exportPdf']
@@ -29,7 +38,7 @@ Route::get('/assessment-monitoring',
 #PDF form criteria
 Route::get('/criteria/export/pdf',
     [PerformanceCriteriaController::class, 'exportPdf']
-)->name('criteria.export.pdf');
+)->name('criteria.export');
 
 #PDF form detail summary
 Route::get('/summary/{nik}/export-pdf', [SummaryController::class, 'exportPdfByNik'])

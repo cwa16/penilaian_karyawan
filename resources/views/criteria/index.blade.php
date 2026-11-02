@@ -24,22 +24,20 @@
                 Master Criteria Penilaian
             </h2>
 
-            <div class="flex gap-2">
-                <a href="{{ route('criteria.export.pdf') }}"
-                        target="_blank"
-                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 shadow-lg">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 16v-8m0 8l-3-3m3 3l3-3M4 20h16" />
-                        </svg>
-                        Export PDF
-                    </a>
-<!--
-                <a href="{{ route('criteria.create') }}"
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
-                    + Tambah Criteria
-                </a> -->
-            </div>
+            <a href="{{ route('criteria.export') }}"
+                target="_blank"
+                class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 shadow">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 16v-8m0 8l-3-3m3 3l3-3M4 20h16" />
+                </svg>
+                Export PDF
+            </a>
+
+            <a href="{{ route('criteria.create') }}"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm shadow-md hidden">
+                + Tambah Criteria
+            </a>
         </div>
         {{-- FLASH MESSAGE --}}
         @if (session('success'))
@@ -65,7 +63,7 @@
                     <th rowspan="3" class="p-1 border w-28 text-center">Aspek Penilaian PA</th>
                     <th rowspan="3" class="p-1 border w-28 text-center">Definisi</th>
                     <th colspan="5" class="p-1 border">Kategori Penilaian</th>
-                    <!-- <th rowspan="3" class="p-1 border w-10">Bobot</th> -->
+                    <th rowspan="3" class="p-1 border w-10">Bobot</th>
                     <th rowspan="3" class="p-1 border w-10">Aksi</th>
                 </tr>
 
@@ -98,21 +96,18 @@
                     @if($currentSection !== $c->section)
 
                         @php
-                $sectionValue = strtolower(str_replace('_', ' ', $c->section ?? ''));
-
-                $sectionColor = match($sectionValue) {
-                    'hasil kerja' => 'bg-blue-200',
-                    'sikap kerja' => 'bg-yellow-200',
-                    'disiplin' => 'bg-green-200',
-                    'kerjasama' => 'bg-red-200',
-                    'kematangan / kedewasaan' => 'bg-purple-200',
-                    'inisiatif' => 'bg-green-200',
-                    'kreativitas' => 'bg-blue-200',
-                    'pengembangan wawasan pengetahuan' => 'bg-yellow-200',
-                    'kemampuan manajerial' => 'bg-purple-200',
-                    default => 'bg-gray-200',
-                };
-            @endphp
+                            $sectionColor = match(strtolower($c->section)) {
+                                'hasil kerja' => 'bg-blue-200',
+                                'sikap kerja' => 'bg-yellow-200',
+                                'disiplin' => 'bg-green-200',
+                                'kerjasama' => 'bg-red-200',
+                                'kematangan / kedewasaan' => 'bg-purple-200',
+                                'inisiatif' => 'bg-green-200',
+                                'kreativitas' => 'bg-blue-200',
+                                'pengembangan wawasan pengetahuan' => 'bg-yellow-200',
+                                'kemampuan manajerial' => 'bg-purple-200',
+                            }
+                        @endphp
 
                         <tr class="{{ $sectionColor }}">
                             <td colspan="10" class="p-1 font-bold text-gray-800 text-sm">
@@ -154,9 +149,9 @@
                             {{ optional($c->scales->where('score', 5)->first())->description ?? '-' }}
                         </td>
 
-                        <!-- <td class="p-1 border text-center font-semibold">
-                            {{ $c->weight }}%
-                        </td> -->
+                        <td class="p-2 border text-center font-semibold text-gray-700">
+                            {{ number_format($c->weight, 0) }}%
+                        </td>
 
                         <td class="p-2 border text-center">
                             <div class="flex justify-center gap-1">
