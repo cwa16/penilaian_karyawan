@@ -20,7 +20,6 @@
                 {{ session('success') }}
             </div>
         @endif
-
         <div class="overflow-x-auto">
             <table class="w-full border text-sm">
 
@@ -76,7 +75,7 @@
                                 'kreativitas' => 'bg-blue-200',
                                 'pengembangan wawasan pengetahuan' => 'bg-yellow-200',
                                 'kemampuan manajerial' => 'bg-purple-200',
-                            } 
+                            }
                         @endphp
 
                         <tr class="{{ $sectionColor }}">
@@ -103,23 +102,23 @@
                         </td>
 
                         {{-- SCALE DESCRIPTIONS (LOGIKA ASLI, AMAN) --}}
-                        <td class="p-2 border text-xs">
+                        <td class="p-1 border text-xs">
                             {{ optional($c->scales->where('score', 1)->first())->description ?? '-' }}
                         </td>
-                        <td class="p-2 border text-xs">
+                        <td class="p-1 border text-xs">
                             {{ optional($c->scales->where('score', 2)->first())->description ?? '-' }}
                         </td>
-                        <td class="p-2 border text-xs">
+                        <td class="p-1 border text-xs">
                             {{ optional($c->scales->where('score', 3)->first())->description ?? '-' }}
                         </td>
-                        <td class="p-2 border text-xs">
+                        <td class="p-1 border text-xs">
                             {{ optional($c->scales->where('score', 4)->first())->description ?? '-' }}
                         </td>
-                        <td class="p-2 border text-xs">
+                        <td class="p-1 border text-xs">
                             {{ optional($c->scales->where('score', 5)->first())->description ?? '-' }}
                         </td>
 
-                        <td class="p-2 border text-center font-semibold">
+                        <td class="p-1 border text-center font-semibold">
                             {{ $c->weight }}%
                         </td>
 

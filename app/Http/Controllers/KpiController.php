@@ -12,7 +12,7 @@ class KpiController extends Controller
         $kpis = KpiScore::latest()->get();
         return view('kpi.index', compact('kpis'));
     }
-     
+
     public function show($id)
     {
         $kpi = \App\Models\KpiScore::findOrFail($id);

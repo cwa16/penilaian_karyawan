@@ -4,7 +4,7 @@
 
             {{-- Header --}}
             <div class="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                
+
                 <div>
                     <h2 class="text-xl font-semibold text-gray-800">Penilaian Karyawan</h2>
 
@@ -71,7 +71,7 @@
 
             {{-- Body --}}
             <div class="px-6 py-4">
-                
+
                 <!-- @if (session('success'))
                     <div class="mb-3 p-2 bg-green-50 border border-green-200 text-green-800 rounded-md text-xs">
                         {{ session('success') }}
@@ -85,15 +85,15 @@
                     {{-- Keterangan Nilai --}}
                     <div class="mb-3 px-4 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs text-gray-600">
                         <div class="flex flex-wrap gap-x-3 gap-y-1">
-                            <span><strong>1</strong> Kurang (B-)</span>
+                            <span><strong>1</strong> Kurang (I)</span>
                             <span>|</span>
-                            <span><strong>2</strong> Cukup (B)</span>
+                            <span><strong>2</strong> Cukup (II)</span>
                             <span>|</span>
-                            <span><strong>3</strong> Baik (B+)</span>
+                            <span><strong>3</strong> Baik (III)</span>
                             <span>|</span>
-                            <span><strong>4</strong> Sangat Baik (A)</span>
+                            <span><strong>4</strong>  Baik Sekali (IV)</span>
                             <span>|</span>
-                            <span><strong>5</strong> Sempurna (S)</span>
+                            <span><strong>5</strong> Istimewa (V)</span>
                         </div>
                     </div>
 

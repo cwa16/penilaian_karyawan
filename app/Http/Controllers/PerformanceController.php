@@ -66,7 +66,7 @@ class PerformanceController extends Controller
                         'assessment_id'   => $assessment->id,
                         'criteria_id'     => $criteriaId,
                         'evaluator_order' => $evaluatorOrder,
-                        'evaluator_nik' => $cekSlot->nik,
+                        'evaluator_nik'   => $cekSlot->nik,
                     ],
                     [
                         'score'      => $score,

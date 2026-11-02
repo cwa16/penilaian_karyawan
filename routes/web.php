@@ -85,6 +85,6 @@ Route::get(
     [\App\Http\Controllers\SummaryController::class, 'detail']
 )->name('summary.detail');
 
-    
+
 // ROUTE LOGIN BAWAAN BREEZE
 require __DIR__ . '/auth.php';
